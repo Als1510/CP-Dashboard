@@ -1,0 +1,14 @@
+Frontend/.angular
+Frontend/.idea
+Frontend/.ionic
+Frontend/.sass-cache
+Frontend/.sourcemaps
+Frontend/.versions
+Frontend/.vscode
+Frontend/coverage
+Frontend/dist
+Frontend/node_modules
+Frontend/platforms
+Frontend/plugins
+Frontend/www
+Backend/node_modules
