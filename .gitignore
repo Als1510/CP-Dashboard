@@ -12,3 +12,4 @@ Frontend/platforms
 Frontend/plugins
 Frontend/www
 Backend/node_modules
+Backend/.env

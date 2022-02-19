@@ -1,0 +1,47 @@
+<ion-card class="sidebar">
+  <div class="logo_content">
+    <ion-icon name="menu-outline" id="btn" (click)="toggleBtn()"></ion-icon>
+    <span class="logo_name">CP Dashboard</span>
+  </div>
+
+  <ul>
+    <li>
+      <a routerLink="/User/dashboard" routerLinkActive="activate">
+        <ion-icon name="apps-outline"></ion-icon>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/User/platforms" routerLinkActive="activate">
+        <ion-icon name="barbell-outline"></ion-icon>
+        <span>Platforms</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/User/about" routerLinkActive="activate">
+        <ion-icon name="people-outline"></ion-icon>
+        <span>About</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/User/contact-us" routerLinkActive="activate">
+        <ion-icon name="mail-outline"></ion-icon>
+        <span>Contact Us</span>
+        <span routerLinkActive="active"></span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="profile">
+    <div class="profile_details">
+      <img src="../../../../assets/temp.jpg">
+      <div class="names">
+        <div class="name">Anshul Sharma</div>
+        <div class="username">Als1510</div>
+      </div>
+    </div>
+    <ion-button class="ion-no-padding" (click)="logout()">
+      <ion-icon name="log-out-outline" id="log_out"></ion-icon>
+    </ion-button>
+  </div>
+</ion-card>
