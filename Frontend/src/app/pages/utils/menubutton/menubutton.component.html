@@ -4,10 +4,10 @@
     <span class="logo_name">CP Dashboard</span>
   </div>
 
-  <ul>
+  <ul (mouseover)="overBtn()" (mouseout)="outBtn()">
     <li>
       <a routerLink="/User/dashboard" routerLinkActive="activate">
-        <ion-icon name="apps-outline"></ion-icon>
+        <ion-icon name="grid-outline"></ion-icon>
         <span>Dashboard</span>
       </a>
     </li>
@@ -15,6 +15,12 @@
       <a routerLink="/User/platforms" routerLinkActive="activate">
         <ion-icon name="barbell-outline"></ion-icon>
         <span>Platforms</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/User/resources" routerLinkActive="activate">
+        <ion-icon name="aperture-outline"></ion-icon>
+        <span>Resources</span>
       </a>
     </li>
     <li>
@@ -45,3 +51,4 @@
     </ion-button>
   </div>
 </ion-card>
+<ion-router-outlet></ion-router-outlet>

@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { PlatformsPageRoutingModule } from './platforms-routing.module';
 
 import { PlatformsPage } from './platforms.page';
-import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component
     IonicModule,
     PlatformsPageRoutingModule
   ],
-  declarations: [PlatformsPage, MenubuttonComponent]
+  declarations: [PlatformsPage,]
 })
 export class PlatformsPageModule {}

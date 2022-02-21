@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="container">
+    <div class="wrapper1">
+      <div class="navbar">
+        <ion-icon name="menu-outline" (click)="toggleBtn()" id="btn"></ion-icon>
+        <div class="logo">CP Dashboard</div>
+        <ul class="navbox">
+          <li>
+            <a routerLink="/login">Login</a>
+          </li>
+          <li>
+            <a routerLink="/register">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrapper2">
+      <div class="part1">
+
+      </div>
+      <div class="part2">
+        <ion-card>
+          <ion-list>
+            <ion-label>
+              Contest
+            </ion-label>
+            <ion-label>
+              Platform
+            </ion-label>
+            <ion-label>
+              Starts in 
+            </ion-label>
+          </ion-list>
+          <ion-list *ngFor="let contest of contests">
+            <ion-label>
+              {{contest.name}}
+            </ion-label>
+            <ion-label>
+              {{contest.site}}
+            </ion-label>
+            <ion-label>
+              {{contest.name}}
+            </ion-label>
+          </ion-list>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

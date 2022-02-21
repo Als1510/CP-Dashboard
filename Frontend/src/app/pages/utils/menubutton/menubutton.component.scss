@@ -5,6 +5,7 @@
 }
 
 .sidebar{
+  z-index: 2;
   position: absolute;
   top:0;
   left: 0;
@@ -13,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px;
+  padding: 8px 0 8px 4px;
 
   .logo_content{
     display: flex;
@@ -55,7 +56,7 @@
         color: #000;
 
         ion-icon{
-          font-size: 30px;
+          font-size: 25px;
           align-self: center;
           padding: 10px;
         }
@@ -67,7 +68,7 @@
     }
 
     li:hover{
-      background: #dfdfdf;
+      background: rgb(245, 242, 242);
       border-radius: 12px;
     }
 
@@ -106,7 +107,7 @@
       width: 80% !important;
       ion-icon{
         color:#000;
-        font-size: 30px !important;
+        font-size: 25px !important;
       }
     }
       
@@ -117,6 +118,7 @@
   width: 220px;
 
   .logo_content{
+    padding-left: 8px;
     justify-content: unset;
     .logo_name{
       display: block;
@@ -125,6 +127,7 @@
   }
 
   ul{
+    padding-left: 10px;
     li{
       a{
         justify-content: unset;
@@ -153,6 +156,5 @@
 }
 
 .activate{
-  background: #dfdfdf;
-  border-radius: 12px;
+  border-right: 2px solid black;
 }
