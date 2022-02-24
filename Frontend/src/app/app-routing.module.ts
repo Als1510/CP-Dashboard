@@ -5,7 +5,7 @@ import { MenubuttonComponent } from './pages/utils/menubutton/menubutton.compone
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'User/resources',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

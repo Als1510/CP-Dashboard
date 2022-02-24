@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/user', require('./routes/api/user'))
+app.use('/api/validation', require('./routes/api/validation'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 const PORT = process.env.PORT
 

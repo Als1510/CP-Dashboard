@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-menubutton',
@@ -9,10 +10,18 @@ import { Router } from '@angular/router';
 export class MenubuttonComponent implements OnInit {
 
   toggle_by_button = false
-  constructor(private _router: Router) { }
+  name
+  username
 
-  ngOnInit() {}
+  constructor(
+    private _router: Router,
+    private _tokenService: TokenService
+  ) { }
 
+  ngOnInit() {
+    this.name = this._tokenService.getName()
+    this.username = this._tokenService.getUserName()
+  }
     
   toggleBtn() {
     let btn = document.querySelector('#btn');
@@ -50,7 +59,7 @@ export class MenubuttonComponent implements OnInit {
   }
 
   logout() {
+    this._tokenService.logout()
     this._router.navigate(['/home']);
   }
-
 }

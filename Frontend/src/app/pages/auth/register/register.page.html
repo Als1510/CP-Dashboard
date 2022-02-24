@@ -1,9 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <ion-input placeholder="Full Name" type="text" name="name" formControlName="name"></ion-input>
+    <ion-input placeholder="Username" type="text" name="username" formControlName="username"></ion-input>
+    <ion-input placeholder="Email" type="email" name="email" formControlName="email"></ion-input>
+    <ion-input placeholder="Password" type="password" name="password" formControlName="password"></ion-input>
+    <ion-button type="submit">Sign Up</ion-button>
+    <span>Already have an account? <a routerLink="/login">Sign in</a></span>
+  </form>
 </ion-content>
