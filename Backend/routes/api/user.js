@@ -76,7 +76,7 @@ router.post('/', [
       from: `"CP-Dashboard" ${process.env.emailId}`,
       to: `${email}`,
       subject:"Email Confirmation",
-      html:`<h1>Account Activation </h1> ${uniqueString}`
+      html:`<h1>Account Activation </h1> <a href="https://competitivepdashboard.herokuapp.com/api/validation/verify/${uniqueString}" target="_blank"> </a>`
     })
 
     await user.save()
