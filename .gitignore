@@ -12,5 +12,5 @@ Frontend/platforms
 Frontend/plugins
 Frontend/www
 Backend/node_modules
-Frontend/src/assests/Temp
+Frontend/src/assests/Temp/*
 Backend/.env
