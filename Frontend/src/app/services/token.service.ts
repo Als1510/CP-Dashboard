@@ -18,7 +18,7 @@ export class TokenService {
     if(token) {
       return token
     } else {
-      return ''
+      return '';
     }
   }
 

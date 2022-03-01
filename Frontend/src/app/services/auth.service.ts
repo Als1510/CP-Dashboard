@@ -23,4 +23,12 @@ export class AuthService {
   login(email, password) {
     return this._http.post(this._env.Mongo_API_URL+'/auth', {email, password}, this.httpOptions)
   }
+
+  requestOtp(email) {
+    return this._http.post(this._env.Mongo_API_URL+'/validation', {email}, this.httpOptions)
+  }
+
+  resetPassword(email, otpCode, password) {
+    return this._http.post(this._env.Mongo_API_URL+'/validation/resetpassword', {email, otpCode, password}, this.httpOptions)
+  }
 }

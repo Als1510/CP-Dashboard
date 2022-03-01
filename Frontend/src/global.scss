@@ -26,4 +26,17 @@
 @import "~@ionic/angular/css/flex-utils.css";
 *{
   user-select: none;
+  // --background: #fff;
+}
+
+:root{
+  --primary-color: #1A374D;
+  --secondary-color: #406882;
+  --tertiary-color: #6998AB;
+  --body-color: #fff;
+}
+
+ion-card, ion-card-content{
+  padding: 0rem !important;
+  margin: 0rem !important;
 }

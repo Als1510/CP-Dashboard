@@ -5,7 +5,7 @@ const app = express()
 require('dotenv').config()
 
 const corsOptions = {
-  origin: "http://localhost:8100"
+  origin: ["http://localhost:8100", "https://cp-dashboard.netlify.app"]
 }
 
 app.use(cors(corsOptions))

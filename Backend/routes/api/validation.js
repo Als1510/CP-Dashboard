@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
+const nodemailer = require('nodemailer')
 const bcrypt = require('bcryptjs')
 require('dotenv').config()
 const { check, validationResult } = require('express-validator')
@@ -17,7 +18,7 @@ router.get('/verify/:uniqueString', async (req, res) => {
 
   if(user) {
     await User.updateOne({_id: user._id}, {$set: {active: true}})
-    res.sendFile(path.join(__dirname + '../../../config/activationResponseSuccess.html'))
+    res.redirect("https://cp-dashboard.netlify.app");
   } else {
     res.sendFile(path.join(__dirname + '../../../config/activationResponseFailure.html'))
   }
@@ -60,12 +61,27 @@ router.post('/', [
     let otpData = new OtpToken({
       email,
       otpCode,
-      expiresIn: new Date().getTime() + 300*1000
+      expiresIn: new Date().getTime() + 120*1000
     })
 
     await otpData.save()
+
+    let transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.emailId,
+        pass: process.env.emailPassword
+      }
+    })
+
+    let info = await transporter.sendMail({
+      from: `"CP-Dashboard" ${process.env.email}`,
+      to:`${email}`,
+      subject:"OTP(One Time Password)",
+      html: `${otpCode}`
+    })
     
-    res.json({ msg: "Otp has been sent to your registered email", name: user.name});
+    res.json({ msg: "OTP has been sent to your registered mail address", name: user.name});
 
   } catch(error) {
     console.error(error.message)

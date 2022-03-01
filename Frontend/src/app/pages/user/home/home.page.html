@@ -2,9 +2,9 @@
   <div class="container">
     <div class="wrapper1">
       <div class="navbar">
-        <ion-icon name="menu-outline" (click)="toggleBtn()" id="btn"></ion-icon>
-        <div class="logo">CP Dashboard</div>
-        <ul class="navbox">
+        <ion-icon name="menu-outline" (click)="toggleBtn()"></ion-icon>
+        <h1>CP Dashboard</h1>
+        <ul>
           <li>
             <a routerLink="/login">Login</a>
           </li>
@@ -13,37 +13,52 @@
           </li>
         </ul>
       </div>
-    </div>
-    <div class="wrapper2">
-      <div class="part1">
 
+      <div class="main-area">
+        <h1>Create a way you're proud of</h1>
+        <p class="description">Discover the platform that gives you the content to improvise, manage your programming skills.</p>
+        <div class="quote-area">
+          <p class="quote">"Any fool can write a code that a computer can understand. Good programers write code that humans can understand."</p>
+          <p class="author">~Martin Fowler</p>
+        </div>
+        <a routerLink="/login">
+        <ion-button size="large">
+            Get Started
+          </ion-button>
+        </a>
       </div>
-      <div class="part2">
-        <ion-card>
-          <ion-list>
-            <ion-label class="list-heading">
-              Contest
-            </ion-label>
-            <ion-label class="list-heading">
+    </div>
+
+    <div class="wrapper2">
+      <ion-card>
+        <div class="contest">
+          <ion-list class="contest_heading">
+            <ion-label class="contest_heading_label">
               Platform
             </ion-label>
-            <ion-label class="list-heading">
-              Starts in 
+            <ion-label class="contest_heading_label">
+              Contest
+            </ion-label>
+            <ion-label class="contest_heading_label">
+              Starts In
             </ion-label>
           </ion-list>
-          <ion-list *ngFor="let contest of contests">
+          <ion-list *ngFor="let contest of contests.slice(0, 5)">
             <ion-label>
-              {{contest.name}}
+              <a routerLink="/login">
+                {{contest.name}}
+              </a>
             </ion-label>
-            <ion-label>
-              {{contest.site}}
-            </ion-label>
-            <ion-label>
-              {{contest.name}}
-            </ion-label>
+            <ion-label>{{contest.site}}</ion-label>
+            <ion-label>{{contest.startIn}}</ion-label>
           </ion-list>
-        </ion-card>
-      </div>
+          <ion-list>
+            <ion-label>--</ion-label>
+            <ion-label>--</ion-label>
+            <ion-label>--</ion-label>
+          </ion-list>
+        </div>
+      </ion-card>
     </div>
   </div>
 </ion-content>

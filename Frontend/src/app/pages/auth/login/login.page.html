@@ -1,8 +1,26 @@
 <ion-content>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-input placeholder="Email" name="email" type="email" formControlName="email"></ion-input>
-    <ion-input placeholder="Password" name="password" type="password" formControlName="password"></ion-input>
-    <ion-button type="submit">Sign In</ion-button>
-    <span>Don't have an account ? <a routerLink="/register">Sign Up</a></span>
-  </form>
+  <div class="container">
+    <ion-buttons slot="start" class="back_button">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <div class="wrapper">
+      <h1>Sign In</h1>
+      <span class="switch_page">Don't have an account? <a routerLink="/register" class="switch_page_link">Sign Up</a></span>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="none">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" name="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="{{ hide ? 'text' : 'password' }}" name="password" formControlName="password"></ion-input>
+          <ion-icon class="eye_icon" *ngIf="hide" title="Show" name="eye-outline" (click)="eye()"></ion-icon>
+          <ion-icon class="eye_icon" *ngIf="!hide" title="Hide" name="eye-off-outline" (click)="eye()"></ion-icon>
+        </ion-item>
+        <a routerLink="/forgetpassword" class="forget_password">Forget Password?</a>
+        <ion-button type="submit" class="submit">Sign In</ion-button>
+      </form>
+      <span class="bottom-description">By signing in, you agree to our Terms of Use and to receive CP Dashboard emails & updates</span>
+    </div>
+  </div>
 </ion-content>

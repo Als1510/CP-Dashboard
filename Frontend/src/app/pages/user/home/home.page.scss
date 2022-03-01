@@ -1,102 +1,204 @@
+ion-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+}
+
+ion-label{
+  width: 33%;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+}
+
 .container{
+  height: auto;
   width: 100%;
-
+  display: flex;
+  flex-direction: column;
+  
   .wrapper1{
-    height: 90vh;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../../../../assets/home1.jpg') center/cover no-repeat;
-
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../../../../assets/home.jpg') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    
     .navbar{
-      color: #fff;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
-      padding: 0.7rem 1rem;
+      margin: 0.5rem 1.5rem;
 
       ion-icon{
-        display: none;
         position: absolute;
-        top: 15px;
+        color: #fff;
+        font-size: 35px;
+        top: 25px;
         left: 15px;
-        font-size: 25px;
+        opacity: 0;
       }
-
-      .logo{
-        margin-left: 40px;
-        font-size: 1.8rem;
+    
+      h1{
+        font-size: 1.7rem;
+        margin-left: 1rem;
+        color: #fff;
+        font-weight: 200;
       }
 
       ul{
         display: flex;
         flex-direction: row;
+        
         li{
+          padding: 0.5rem;
           list-style: none;
-          padding: 0 1rem;
+          font-size: 1rem;
+          font-weight: 200;
+
           a{
-            color: #fff;
             text-decoration: none;
-            font-size: 1.1rem;
+            color: #fff;
           }
         }
       }
     }
   }
 
-  .wrapper2{
-    height: 70vh;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(500px, 1fr));
-    .part1{
-      background: black;
+  .main-area{
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3.5rem;
+    width: 90vw;
+    
+    h1{
+      font-size: 4rem;
+      margin-bottom: 2.5rem;
+      color: #fff;
+      text-align: center;
     }
 
-    .part2{
-      ion-list{
-        display: flex;
-        justify-content: space-evenly;
-        .list-heading{
-          font-size: 1rem;
-          color: #000;
-          font-weight: 400;
-          padding: 0.2rem 0;
-        }
+    p{
+      color: #fff;
+    }
+
+    .description{
+      font-size: 1.2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    
+    .quote-area{
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;     
+      .quote{
+        font-style: italic;
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
+      .author{
+        align-self: flex-end;
+        font-size: 0.8rem;
+      }
+    }
+
+    ion-button{
+      text-transform: none;
+      --border-radius: 12px;
+      --background: #000;
+    }
+  }
+
+  .wrapper2{
+    padding: 1rem 0.5rem;
+    .contest{
+      margin: 1rem 0.5rem;
+      .contest_heading{
+        background-color: #000;
+        color: #fff;
+        border-radius: 15px;
       }
     }
   }
 }
 
-@media(max-width: 500px) {
-  .container{
+@media(max-width: 768px) {
+  .container {
+    .main-area{
+      h1{
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+      .description{
+        font-size: 1rem;
+        margin: 2rem 0;
+      }
+      
+      ion-button{
+        font-size: 1.1rem;
+        --border-radius: 12px;
+      }
+    }
+  }
+}
+
+@media(max-width:480px) {
+  .container {
     .wrapper1{
       .navbar{
         flex-direction: column;
-        align-items: flex-start;
+        margin: 0.5rem 0 1rem 4rem;
+  
         ion-icon{
-          display: block;
+          opacity: 1;
         }
-        .navbox{
-          margin-left: 40px;
+
+        h1{
+          font-size: 1.7rem;
+          margin-left: 0;
+          margin-bottom: 0.5rem;
         }
+  
         ul{
-          display: none;
+          opacity: 0;
           flex-direction: column;
           padding: 0;
           margin: 0;
+          
           li{
-            width: 100%;
-            padding: 7px 0;
-            a{
-              color: #fff;
-              text-decoration: none;
-            }
-          }
-          li:hover{
-            background: black;
+            padding: 0.5rem 0;
           }
         }
-        ul.active{
-          display: block;
+        
+        .active{
+          opacity: 1;
         }
+      }
+    }
+    .main-area{
+      margin-top: 0rem;
+      h1{
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 2rem;
+      }
+      .description{
+        font-size: 1rem;
+        margin: 2rem 0;
+      }
+      
+      ion-button{
+        text-transform: none;
+        font-size: 1.1rem;
+        --border-radius: 12px;
       }
     }
   }

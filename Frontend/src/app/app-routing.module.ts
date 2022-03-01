@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guard/auth.guard';
 import { MenubuttonComponent } from './pages/utils/menubutton/menubutton.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
     path: "User",
     component: MenubuttonComponent,
     pathMatch: "prefix",
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -48,16 +50,20 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'servererror',
+    path: 'forgetpassword',
+    loadChildren: () => import('./pages/auth/forgetpassword/forgetpassword.module').then( m => m.ForgetpasswordPageModule)
+  },
+  {
+    path: '500',
     loadChildren: () => import('./pages/error/servererror/servererror.module').then(m => m.ServererrorPageModule)
   },
   {
-    path: 'pagenotfound',
+    path: '400',
     loadChildren: () => import('./pages/error/pagenotfound/pagenotfound.module').then(m => m.PagenotfoundPageModule)
   },
   {
     path: '**',
-    redirectTo: 'pagenotfound'
+    redirectTo: '400'
   },
 ];
 

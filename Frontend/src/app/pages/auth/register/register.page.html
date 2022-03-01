@@ -1,10 +1,32 @@
 <ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <ion-input placeholder="Full Name" type="text" name="name" formControlName="name"></ion-input>
-    <ion-input placeholder="Username" type="text" name="username" formControlName="username"></ion-input>
-    <ion-input placeholder="Email" type="email" name="email" formControlName="email"></ion-input>
-    <ion-input placeholder="Password" type="password" name="password" formControlName="password"></ion-input>
-    <ion-button type="submit">Sign Up</ion-button>
-    <span>Already have an account? <a routerLink="/login">Sign in</a></span>
-  </form>
+  <div class="container">
+    <ion-buttons slot="start" class="back_button">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <div class="wrapper">
+      <h1>Sign Up</h1>
+      <span class="switch_page">Already have an account? <a routerLink="/login" class="switch_page_link">Sign in</a></span>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="none">
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input type="text" name="name" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input type="text" name="username" formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" name="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input placeholder="Password" type="{{ hide ? 'text' : 'password' }}" name="password"  formControlName="password"></ion-input>
+              <ion-icon *ngIf="hide" title="Show" name="eye-outline" (click)="eye()"></ion-icon>
+              <ion-icon *ngIf="!hide" name="eye-off-outline" (click)="eye()"></ion-icon>
+        </ion-item>
+        <ion-button type="submit" class="submit">Sign Up</ion-button>
+      </form>
+      <span class="bottom-description">By signing up, you agree to our Terms of Use and to receive CP Dashboard emails & updates</span>
+    </div>
+  </div>
 </ion-content>

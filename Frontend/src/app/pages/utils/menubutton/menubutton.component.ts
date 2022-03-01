@@ -36,7 +36,6 @@ export class MenubuttonComponent implements OnInit {
   }
   
   overBtn() {
-    console.log(this.toggle_by_button)
     let btn = document.querySelector('#btn');
     let sidebar = document.querySelector('.sidebar')
     if(!this.toggle_by_button) {
