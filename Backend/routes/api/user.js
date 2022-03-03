@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator')
 require('dotenv').config()
 
 const User = require('../../models/User')
+const Platform = require('../../models/Platform')
 
 const randString = () => {
   const len = 8

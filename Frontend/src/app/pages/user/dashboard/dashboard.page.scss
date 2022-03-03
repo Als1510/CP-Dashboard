@@ -1,0 +1,50 @@
+ion-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+}
+
+ion-label{
+  width: 30%;
+  text-overflow: ellipsis;
+  text-align: center;
+  align-self: center;
+}
+
+ion-header{
+  position: absolute;
+  top:0;
+  left: 75px;
+  width: calc(100% - 85px);
+
+  .header_heading{
+    font-size: 1.8rem;
+  }
+}
+ion-content{
+  box-sizing: border-box;
+  position: absolute;
+  top: 80px;
+  left: 75px;
+  width: calc(100% - 85px);
+  .wrapper1{
+    .contest_header{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+
+      .heading{
+        font-size: 1.2rem;
+        color: #000;
+      }
+
+      .search_by{
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+}

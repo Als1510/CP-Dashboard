@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-platforms',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlatformsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _userSerive: UserService
+  ) { }
 
   ngOnInit() {
+  }
+
+  getplatform() {
+    
   }
 
 }
