@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   async getUpcomingContest() {
     await this._contestService.upcomingContest().subscribe(
       async data => {
-        let platformsData = await this._utilService.extractPlatforms(data)
+        let platformsData = await this._utilService.extractPlatforms(data, this.platforms)
         this.contests = await this._utilService.convertDateinIST(platformsData)
       }
     )

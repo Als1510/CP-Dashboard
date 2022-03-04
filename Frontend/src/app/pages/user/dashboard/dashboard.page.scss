@@ -1,40 +1,63 @@
-ion-list{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 1rem 0;
-}
-
-ion-label{
-  width: 30%;
-  text-overflow: ellipsis;
-  text-align: center;
-  align-self: center;
-}
-
 ion-header{
   position: absolute;
   top:0;
   left: 75px;
-  width: calc(100% - 85px);
+  width: calc(100% - 80px);
 
   .header_heading{
     font-size: 1.8rem;
+    text-align: start;
   }
 }
+
 ion-content{
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   box-sizing: border-box;
   position: absolute;
-  top: 80px;
+  top: 65px;
   left: 75px;
-  width: calc(100% - 85px);
+  width: calc(100% - 75px);
+  height: calc(100% - 65px);
+
   .wrapper1{
+    margin: 1rem 0.2rem 0 0.1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+
+    .card{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+
+      ion-card-content{
+        text-align: center;
+        .wrapper1_heading{
+          font-size: 1.5rem;
+          color: rgb(32, 181, 240);
+        }
+      }
+
+      ion-progess-bar{
+        border-radius: 50%;
+      }
+
+    }
+  }
+
+  .wrapper2{
+    margin: 1rem 0.2rem 0 0.1rem;
     .contest_header{
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0.5rem 1rem;
 
       .heading{
         font-size: 1.2rem;
@@ -44,6 +67,107 @@ ion-content{
       .search_by{
         display: flex;
         flex-direction: row;
+      }
+    }
+
+    .contest{
+      .contest_heading_header{
+        .contest_heading_label{
+          font-size: 1rem;
+          color: #000;
+        }
+      }
+      ion-list{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 1rem 0;
+        margin-left: 0.2rem;
+        
+        ion-label{
+          width: 30%;
+          text-overflow: ellipsis;
+          text-align: center;
+          align-self: center;
+          a{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  ion-content{
+    .wrapper2{
+      .contest_header{
+        display: flex;
+        flex-direction: column;
+
+        .heading{
+          font-size: 1.2rem;
+          align-self: flex-start;
+          color: #000;
+        }
+
+        .search_by{
+          display: flex;
+          flex-direction: row;
+          align-self: flex-end;
+        }
+      }
+      .contest{
+        ion-list{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          padding: 0.5rem 0;
+          
+          .duration{
+            display: none;
+          }
+          ion-label{
+            width: 30%;
+            text-overflow: ellipsis;
+            text-align: center;
+            align-self: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  ion-content{
+    .wrapper2{
+      .contest_header{
+        .heading{
+          align-self: center;
+        }
+
+        .search_by{
+          align-self: center;
+        }
+      }
+      .contest{
+        ion-list{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          padding: 1rem 0;
+          
+          .duration{
+            display: none;
+          }
+          ion-label{
+            width: 30%;
+            text-overflow: ellipsis;
+            text-align: center;
+            align-self: center;
+          }
+        }
       }
     }
   }

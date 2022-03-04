@@ -11,6 +11,8 @@ import { UtilService } from 'src/app/services/util.service';
 export class DashboardPage implements OnInit {
 
   contests
+  platform = new Array()
+  time = new Array()
 
   constructor(
     private _contestService: ContestService,
@@ -22,11 +24,31 @@ export class DashboardPage implements OnInit {
     this.getUpcomingContest()
   }
 
+  platformChange(data) {
+    if(data == "all") {
+      this.platform = new Array()
+    } else {
+      this.platform = new Array(data)
+    }
+    this.getUpcomingContest()
+  }
+
+  timeChange(data) {
+    if(data == "all") {
+      this.time = new Array()
+    } else {
+      this.time = new Array(data)
+    }
+    this.getUpcomingContest()
+  }
+
   async getUpcomingContest() {
     this._contestService.upcomingContest().subscribe(
       data => {
         this._loaderService.isLoading.next(false);
-        this.contests = this._utilService.convertDateinIST(data)
+        let platformData = this._utilService.extractPlatforms(data, this.platform)
+        let timeData = this._utilService.extractTime(platformData, this.time)
+        this.contests = this._utilService.convertDateinIST(timeData)
       }
     )
   }

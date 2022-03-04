@@ -4,76 +4,93 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card class="wrapper1">
-    <div class="contest_header">
-      <ion-label class="heading">Upcoming Contests</ion-label>
-      <div class="search_by">
-        <div class="search">
-          <ion-select cancelText="Cancel" okText="Okay" placeholder="Platform">
-            <ion-select-option value="all" selected="all">All</ion-select-option>
-            <ion-select-option value="codechef">Codechef</ion-select-option>
-            <ion-select-option value="codeforces">Codeforces</ion-select-option>
-            <ion-select-option value="leetcode">Leetcode</ion-select-option>
-            <ion-select-option value="hackerrank">Hackerrank</ion-select-option>
-            <ion-select-option value="hackerearth">Hacker Earth</ion-select-option>
-            <ion-select-option value="atcoder">Atcoder</ion-select-option>
-            <ion-select-option value="spoj">SPOj</ion-select-option>
-          </ion-select>
-        </div>
+  <!-- <div class="wrapper1">
+    <ion-card class="card1 card">
+      <ion-card-content>
+        <p class="wrapper1_heading">50</p>
+        Comments
+      </ion-card-content>
+      <ion-icon name="chatbox-outline"></ion-icon>
+    </ion-card>
+    <ion-card class="card2 card">
+      <ion-card-content>
+        <p class="wrapper1_heading">50</p>
+        Platforms
+      </ion-card-content>
+      <ion-progress-bar value="0.5"></ion-progress-bar>
+    </ion-card>
+    <ion-card  class="card3 card">
+      <ion-card-content>
+        <p class="wrapper1_heading">50</p>
+        Platforms
+      </ion-card-content>
+      <ion-progress-bar value="0.5"></ion-progress-bar>
+    </ion-card>
+  </div> -->
+  <div class="wrapper2">
+    <ion-card>
+      <div class="contest_header">
+        <ion-label class="heading">Upcoming Contests</ion-label>
+        <div class="search_by">
+          <div class="search">
+            <ion-select (ionChange)="platformChange($event.target.value)" cancelText="Cancel" okText="Okay"
+              placeholder="Platform">
+              <ion-select-option value="all">All</ion-select-option>
+              <ion-select-option value="codechef">Codechef</ion-select-option>
+              <ion-select-option value="codeforces">Codeforces</ion-select-option>
+              <ion-select-option value="leetcode">Leetcode</ion-select-option>
+              <ion-select-option value="hackerrank">Hackerrank</ion-select-option>
+              <ion-select-option value="hackerearth">Hacker Earth</ion-select-option>
+              <ion-select-option value="atcoder">Atcoder</ion-select-option>
+              <ion-select-option value="spoj">SPOJ</ion-select-option>
+            </ion-select>
+          </div>
 
-        <div class="search">
-          <ion-select cancelText="Cancel" okText="Okay" placeholder="Time">
-            <ion-select-option value="all" selected="all">All</ion-select-option>
-            <ion-select-option value="12">12 Hours</ion-select-option>
-            <ion-select-option value="24">24 Hours</ion-select-option>
-            <ion-select-option value="week">Week</ion-select-option>
-            <ion-select-option value="Month">Month</ion-select-option>
-          </ion-select>
+          <div class="search">
+            <ion-select (ionChange)="timeChange($event.target.value)" cancelText="Cancel" okText="Okay"
+              placeholder="Time">
+              <ion-select-option value="all" selected="all">All</ion-select-option>
+              <ion-select-option value="today">Today</ion-select-option>
+              <ion-select-option value="tomorrow">Tomorrow</ion-select-option>
+              <ion-select-option value="weak">Weak</ion-select-option>
+              <ion-select-option value="month">Month</ion-select-option>
+            </ion-select>
+          </div>
         </div>
       </div>
-    </div>
-    <ion-card-content class="contest">
-      <ion-list class="contest_heading_header">
-        <ion-label class="contest_heading_label">
-          Name
-        </ion-label>
-        <ion-label class="contest_heading_label">
-          Platform
-        </ion-label>
-        <ion-label class="contest_heading_label">
-          Starts in
-        </ion-label>
-        <ion-label class="contest_heading_label">
-          Duration
-        </ion-label>
-      </ion-list>
-      <ion-list *ngFor="let contest of contests">
-        <ion-label>
-          <a [href]="contest.url" target="_blank">
-            {{contest.name}}
-          </a>
-        </ion-label>
-        <ion-label>
-          {{contest.site}}
-        </ion-label>
-        <ion-label>
-          {{contest.startIn}}
-        </ion-label>
-        <ion-label>
-          {{contest.duration}}
-        </ion-label>
-      </ion-list>
+      <ion-card-content class="contest">
+        <ion-list class="contest_heading_header">
+          <ion-label class="contest_heading_label">
+            Name
+          </ion-label>
+          <ion-label class="contest_heading_label">
+            Platform
+          </ion-label>
+          <ion-label class="contest_heading_label">
+            Starts in
+          </ion-label>
+          <ion-label class="contest_heading_label duration">
+            Duration
+          </ion-label>
+        </ion-list>
+        <ion-list *ngFor="let contest of contests">
+          <ion-label>
+            <a [href]="contest.url" target="_blank">
+              {{contest.name}}
+            </a>
+          </ion-label>
+          <ion-label>
+            {{contest.site}}
+          </ion-label>
+          <ion-label>
+            {{contest.startIn}}
+          </ion-label>
+          <ion-label class="duration">
+            {{contest.duration}}
+          </ion-label>
+        </ion-list>
 
-    </ion-card-content>
-  </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
-<!-- 
-  duration
-  end_time 
-  in_24_hours
-  name
-  site
-  start_time
-  status
-  url
--->
