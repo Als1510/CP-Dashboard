@@ -29,7 +29,9 @@ router.post('/', [
       return res.status(400).json({ errors: [{ msg: 'Please register your account' }] })
     }
 
-    if (user.active === 'false') {
+    console.log(user.active)
+
+    if (user.active === false) {
       let registeredTime = user.date.getTime() + 60 * 60 * 24 * 1000
       let currTime = new Date().getTime()
       if (registeredTime - currTime < 0) {
