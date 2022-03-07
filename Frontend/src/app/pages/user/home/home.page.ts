@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   element
   
   ngOnInit() {
-    // this.getUpcomingContest()
+    this.getUpcomingContest()
     this.element = document.querySelectorAll('.faq_icon')
     this._loaderService.isLoading.next(false)
     this.element.forEach((event)=>{
