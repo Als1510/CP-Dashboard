@@ -17,15 +17,32 @@ export class HomePage implements OnInit {
 
   contests = new Array();
   platforms = ['codechef', 'codeforces', 'hackerrank', 'harkerearth', 'leetcode']
-
+  element
+  
   ngOnInit() {
-    this.getUpcomingContest()
+    // this.getUpcomingContest()
+    this.element = document.querySelectorAll('.faq_icon')
     this._loaderService.isLoading.next(false)
+    this.element.forEach((event)=>{
+      event.addEventListener('click', ()=>{
+        if(event.classList.contains('rotate')) {
+          event.classList.remove('rotate')
+          event.nextSibling.style.display = 'none';
+        } else {
+          event.nextSibling.style.display = 'block';
+          event.classList.add('rotate')
+        }
+      })
+    })
   }
 
   toggleBtn() {
-    let ul = document.querySelector('ul');
-    ul.classList.toggle('active')
+
+  }
+
+  showFAQAnswer() {
+    let ele = document.getElementsByClassName('faq_icon');
+
   }
 
   async getUpcomingContest() {

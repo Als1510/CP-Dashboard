@@ -129,6 +129,48 @@ a{
       }
     }
   }
+
+  .wrapper3{
+    padding: 1rem 0.5rem;
+    ion-card{
+      padding:1rem !important;
+      .faq_heading{
+        font-size: 1.5rem;
+      }
+
+      .faq_list{
+        margin: 1rem 0 0 1rem !important;
+        .faq_question{
+          position: relative;
+          padding: 0.3rem 0;
+          .question{
+            color: #000;
+            font-size: 1rem;
+            margin:0 2rem 0.5rem 0;
+            font-weight: bold;
+          }
+          .faq_icon{
+            position: absolute;
+            top:5px;
+            right:5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+          }
+          .answer{
+            transition: 0.3s ease-in;
+            color: #000;
+            font-size: 1rem;
+            margin:0.5rem 2rem 0.5rem 0.3rem;
+            display: none;
+          }
+          .rotate{
+            transition: 0.3s ease-in;
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+  }
 }
 
 @media(max-width: 768px) {
