@@ -1,2 +1,32 @@
 <ion-content>
+  <h1>Contact Us</h1>
+  <div class="wrapper">
+    <ion-card>
+      <ion-card-content class="form_area">
+        <h1 class="form_heading">Leave Email us</h1>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <ion-item lines="none">
+            <ion-label position="floating">Full Name</ion-label>
+            <ion-input type="text" name="name" formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" name="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label position="floating">Contact No.</ion-label>
+            <ion-input type="numeric" name="contactNo" formControlName="contactNo"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label position="floating">Message</ion-label>
+            <ion-textarea name="message" formControlName="message" placeholder="Leave more information here"></ion-textarea>
+          </ion-item>
+          <ion-button type="submit" [disabled]="contactForm.invalid">Submit</ion-button>
+        </form>
+      </ion-card-content>
+      <ion-card-content class="form_image">
+        <img src="../../../../assets/contact-us.jpg" alt="">
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

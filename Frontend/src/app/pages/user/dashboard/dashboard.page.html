@@ -1,32 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title class="header_heading">Dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
 <ion-content>
-  <!-- <div class="wrapper1">
+  <div class="header">
+    <h1>Dashboard</h1>
+    <div class="profile">
+      <div class="profile_details">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <p class="username">als.1510</p>
+      </div>
+      <p class="name">Anshul Sharma</p>
+    </div>
+  </div>
+  <div class="wrapper1">
     <ion-card class="card1 card">
       <ion-card-content>
         <p class="wrapper1_heading">50</p>
-        Comments
+        <p class="wrapper1_content">Comments</p>
       </ion-card-content>
       <ion-icon name="chatbox-outline"></ion-icon>
     </ion-card>
     <ion-card class="card2 card">
       <ion-card-content>
-        <p class="wrapper1_heading">50</p>
-        Platforms
+        <p class="wrapper1_content">Registered Platforms</p>
       </ion-card-content>
-      <ion-progress-bar value="0.5"></ion-progress-bar>
+      <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" [style.--value]="value" [style.--registeredPlatform]="registeredPlatform"></div>
     </ion-card>
-    <ion-card  class="card3 card">
-      <ion-card-content>
-        <p class="wrapper1_heading">50</p>
-        Platforms
-      </ion-card-content>
-      <ion-progress-bar value="0.5"></ion-progress-bar>
-    </ion-card>
-  </div> -->
+  </div>
   <div class="wrapper2">
     <ion-card>
       <div class="contest_header">
@@ -58,7 +55,7 @@
           </div>
         </div>
       </div>
-      <ion-card-content class="contest">
+      <ion-card-content class="contest" *ngIf="contests.length>0; else nodata">
         <ion-list class="contest_heading_header">
           <ion-label class="contest_heading_label">
             Name
@@ -89,8 +86,10 @@
             {{contest.duration}}
           </ion-label>
         </ion-list>
-
       </ion-card-content>
+      <ng-template #nodata>
+        <span class="no_data">No Contest</span>
+      </ng-template>
     </ion-card>
   </div>
 </ion-content>

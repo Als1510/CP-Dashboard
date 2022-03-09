@@ -31,7 +31,7 @@
 
     <div class="wrapper2">
       <ion-card>
-        <div class="contest">
+        <div class="contest" *ngIf="contests.length>0; else nodata">
           <ion-list class="contest_heading">
             <ion-label class="contest_heading_label">
               Platform
@@ -52,12 +52,11 @@
             <ion-label>{{contest.site}}</ion-label>
             <ion-label>{{contest.startIn}}</ion-label>
           </ion-list>
-          <ion-list>
-            <ion-label>--</ion-label>
-            <ion-label>--</ion-label>
-            <ion-label>--</ion-label>
-          </ion-list>
+          <a routerLink="/login" class="more">...more</a>
         </div>
+        <ng-template #nodata>
+          <span class="no_data">No Contest</span>
+        </ng-template>
       </ion-card>
     </div>
 

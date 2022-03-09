@@ -1,7 +1,7 @@
 <ion-card class="sidebar">
   <div class="logo_content">
     <ion-icon name="menu-outline" id="btn" (click)="toggleBtn()"></ion-icon>
-    <span class="logo_name">CP Dashboard</span>
+    <img src="../../../../assets/logo.png" alt="logo" class="logo_name">
   </div>
 
   <ul (mouseover)="overBtn()" (mouseout)="outBtn()">
@@ -39,16 +39,10 @@
   </ul>
 
   <div class="profile">
-    <div class="profile_details">
-      <img src="../../../../assets/home.jpg">
-      <div class="names">
-        <div class="name">{{name}}</div>
-        <div class="username">{{username}}</div>
-      </div>
-    </div>
     <ion-button class="ion-no-padding" (click)="logout()">
       <ion-icon name="log-out-outline" id="log_out"></ion-icon>
     </ion-button>
+    <span>Logout</span>
   </div>
 </ion-card>
 <ion-router-outlet></ion-router-outlet>

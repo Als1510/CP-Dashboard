@@ -37,12 +37,12 @@ export class HomePage implements OnInit {
   }
 
   toggleBtn() {
-
+    let ul = document.querySelector('ul');
+    ul.classList.toggle('active')
   }
 
   showFAQAnswer() {
     let ele = document.getElementsByClassName('faq_icon');
-
   }
 
   async getUpcomingContest() {

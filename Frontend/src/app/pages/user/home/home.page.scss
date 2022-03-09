@@ -121,12 +121,22 @@ a{
   .wrapper2{
     padding: 1rem 0.5rem;
     .contest{
-      margin: 1rem 0.5rem;
+      margin: 1rem 0.5rem 0.8rem 0.5rem;
       .contest_heading{
         background-color: #000;
         color: #fff;
         border-radius: 15px;
       }
+      .more{
+        color: blue;
+        padding-left: 0.7rem;
+      }
+    }
+    .no_data{
+      font-size: 1.5rem;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
     }
   }
 
