@@ -3,21 +3,21 @@
   <div class="wrapper">
     <ion-card>
       <ion-card-content class="form_area">
-        <h1 class="form_heading">Leave Email us</h1>
+        <h1 class="form_heading">Leave Email Us</h1>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-          <ion-item lines="none">
+          <ion-item lines="none" class="ion-no-padding">
             <ion-label position="floating">Full Name</ion-label>
             <ion-input type="text" name="name" formControlName="name"></ion-input>
           </ion-item>
-          <ion-item lines="none">
+          <ion-item lines="none" class="ion-no-padding">
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" name="email" formControlName="email"></ion-input>
           </ion-item>
-          <ion-item lines="none">
+          <ion-item lines="none" class="ion-no-padding">
             <ion-label position="floating">Contact No.</ion-label>
-            <ion-input type="numeric" name="contactNo" formControlName="contactNo"></ion-input>
+            <ion-input type="numeric" name="contactNo" formControlName="contactNo" required></ion-input>
           </ion-item>
-          <ion-item lines="none">
+          <ion-item lines="none" class="ion-no-padding">
             <ion-label position="floating">Message</ion-label>
             <ion-textarea name="message" formControlName="message" placeholder="Leave more information here"></ion-textarea>
           </ion-item>
