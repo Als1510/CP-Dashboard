@@ -26,6 +26,7 @@ export class ContactUsPage implements OnInit {
   }
 
   onSubmit() {
+    this._alertService.presentToast('Form submitted successfully. We\' contact you soon', 'success')
     this.contactForm.reset()
   }
 }
