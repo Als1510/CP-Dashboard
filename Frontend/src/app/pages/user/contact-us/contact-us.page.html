@@ -4,7 +4,7 @@
     <ion-card>
       <ion-card-content class="form_area">
         <h1 class="form_heading">Leave Email Us</h1>
-        <form [formGroup]="contactForm" name="contactForm" (ngSubmit)="onSubmit()">
+        <!-- <form [formGroup]="contactForm" data-netlify="true" name="contactForm" (ngSubmit)="onSubmit()">
           <ion-item lines="none" class="ion-no-padding">
             <ion-label position="floating">Full Name</ion-label>
             <ion-input type="text" name="name" formControlName="name"></ion-input>
@@ -22,6 +22,25 @@
             <ion-textarea name="message" formControlName="message" placeholder="Leave more information here"></ion-textarea>
           </ion-item>
           <ion-button type="submit" [disabled]="contactForm.invalid">Submit</ion-button>
+        </form> -->
+        <form action="post" data-netlify="true">
+          <ion-item lines="none" class="ion-no-padding">
+            <ion-label position="floating">Full Name</ion-label>
+            <ion-input type="text" name="name"></ion-input>
+          </ion-item>
+          <ion-item lines="none" class="ion-no-padding">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" name="email"></ion-input>
+          </ion-item>
+          <ion-item lines="none" class="ion-no-padding">
+            <ion-label position="floating">Contact No.</ion-label>
+            <ion-input type="numeric" name="contactNo" required></ion-input>
+          </ion-item>
+          <ion-item lines="none" class="ion-no-padding">
+            <ion-label position="floating">Message</ion-label>
+            <ion-textarea name="message" placeholder="Leave more information here"></ion-textarea>
+          </ion-item>
+          <ion-button type="submit">Submit</ion-button>
         </form>
       </ion-card-content>
       <ion-card-content class="form_image">
