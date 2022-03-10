@@ -4,8 +4,7 @@
     <ion-card>
       <ion-card-content class="form_area">
         <h1 class="form_heading">Leave Email Us</h1>
-        <form [formGroup]="contactForm" method="post" name="contactForm" (ngSubmit)="onSubmit()">
-          <input type="hidden" name="contact-form" value="contactForm">
+        <form [formGroup]="contactForm" name="contactForm" (ngSubmit)="onSubmit()">
           <ion-item lines="none" class="ion-no-padding">
             <ion-label position="floating">Full Name</ion-label>
             <ion-input type="text" name="name" formControlName="name"></ion-input>
