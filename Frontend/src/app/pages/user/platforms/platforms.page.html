@@ -1,3 +1,31 @@
 <ion-content>
   <h1>Platforms</h1>
+  <ion-card class="modal" id="modal">
+    <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
+      <ion-item lines="none">
+        <ion-label position="stacked">Platform Name</ion-label>
+        <ion-input type="text" name="platformName" formControlName="platformName" readonly value={{platformName}}>
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Username</ion-label>
+        <ion-input type="text" name="username" formControlName="username"></ion-input>
+      </ion-item>
+      <div class="buttons">
+        <ion-button type="submit">Save</ion-button>
+        <ion-button (click)="hideCard()">Cancel</ion-button>
+      </div>
+    </form>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="center" *ngIf="platforms.length">
+    <ion-fab-button>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let platform of platforms" (click)="showCard(platform)">
+        <img [src]="'../../../../assets/Platforms/'+platform+'.png'">
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

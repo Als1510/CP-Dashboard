@@ -11,24 +11,26 @@ const Platform = require('../../models/Platform')
 // @access  Private
 router.get('/details', auth, async (req, res) => {
   try {
-    let platform = await Platform.findOne({ user: req.user.id })
+    let platformData = await Platform.findOne({ user: req.user.id })
 
-    if(platform) {
-      return res.json({platform})
+    if(platformData) {
+      return res.json({platformData})
     }
 
-    platform = new Platform({
+    platformData = new Platform({
       user: req.user.id,
-      codechef: null,
-      codeforces: null,
-      spoj: null,
-      leetcode: null,
-      atcoder: null
+      platform: {
+        codechef: null,
+        codeforces: null,
+        spoj: null,
+        leetcode: null,
+        atcoder: null
+      }
     })
 
-    await platform.save()
+    await platformData.save()
 
-    res.json({platform})
+    res.json({platformData})
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error')
@@ -47,13 +49,29 @@ router.put('/updateplatform', [auth, [
   const { platformName , username } = req.body;
 
   try {
-    const platform = await Platform.findOneAndUpdate(
-      { user: req.user.id},
-      { $set: {[platformName] : username}},
-      { new: true }
-    )
+    let platformData = await Platform.findOne({ user: req.user.id})
 
-    return res.json({platform, msg:"Data updated successfully"})
+    if(platformName === "codechef") platformData.platform.codechef = username
+    if(platformName === "codeforces") platformData.platform.codeforces = username
+    if(platformName === "spoj") platformData.platform.spoj = username
+    if(platformName === "leetcode") platformData.platform.leetcode = username
+    if(platformName === "atcoder") platformData.platform.atcoder = username
+
+    await Platform.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: platformData }, 
+      { new: true }
+    );
+
+    // newPlatformData.platform.$(platformName) = username
+    // console.log(newPlatformData.platform)
+    // const platformData = await Platform.findOneAndUpdate(
+    //   { user: req.user.id},
+    //   { $set: {platform: {[platformName] : username}}},
+    //   { $new: true }
+    // )
+
+    return res.json({platformData, msg:"Data updated successfully"})
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");

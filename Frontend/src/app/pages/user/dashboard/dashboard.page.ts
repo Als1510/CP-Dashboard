@@ -50,16 +50,10 @@ export class DashboardPage implements OnInit {
   getPlatforms() {
     this._userService.getPlatforms().subscribe(
       data => {
-        if(data['platform'].atcoder) 
-          this.registeredPlatform++
-        if(data['platform'].codechef)
-          this.registeredPlatform++
-        if(data['platform'].spoj)
-          this.registeredPlatform++
-        if(data['platform'].leetcode)
-          this.registeredPlatform++
-        if(data['platform'].codeforces)
-          this.registeredPlatform++
+        for(let prop in data['platformData'].platform) {
+          if(data['platformData'].platform[prop])
+            this.registeredPlatform++
+        }
         this.value = 20*this.registeredPlatform
         this._loaderService.isLoading.next(false);
       }

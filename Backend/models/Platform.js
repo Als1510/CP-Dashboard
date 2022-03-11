@@ -5,20 +5,22 @@ const PlatoformSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
-  codechef: {
-    type: String
-  },
-  codeforces: {
-    type: String
-  },
-  spoj: {
-    type: String
-  },
-  leetcode: {
-    type: String
-  },
-  atcoder: {
-    type: String
+  platform: {
+    codechef: {
+      type: String,
+    },
+    codeforces: {
+      type: String,
+    },
+    spoj: {
+      type: String,
+    },
+    leetcode: {
+      type: String,
+    },
+    atcoder: {
+      type: String,
+    }
   }
 })
 
