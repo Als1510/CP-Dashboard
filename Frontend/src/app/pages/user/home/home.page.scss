@@ -43,11 +43,10 @@ a{
         opacity: 0;
       }
     
-      h1{
-        font-size: 1.7rem;
-        margin-left: 1rem;
-        color: #fff;
-        font-weight: 200;
+      img{
+        height: 90px;
+        width: fit-content;
+        margin: 0.3rem 0 0 1rem;
       }
 
       ul{
@@ -57,12 +56,11 @@ a{
         li{
           padding: 0.5rem;
           list-style: none;
-          font-size: 1rem;
-          font-weight: 200;
 
           a{
             text-decoration: none;
             color: #fff;
+            font-size: 1.2rem;
           }
         }
       }
@@ -129,7 +127,9 @@ a{
       }
       .more{
         color: blue;
-        padding-left: 0.7rem;
+        display: flex;
+        justify-content: end;
+        padding-right: 0.5rem;
       }
     }
     .no_data{
@@ -146,6 +146,7 @@ a{
       padding:1rem !important;
       .faq_heading{
         font-size: 1.5rem;
+        font-weight: 600;
       }
 
       .faq_list{
@@ -156,8 +157,8 @@ a{
           .question{
             color: #000;
             font-size: 1rem;
-            margin:0 2rem 0.5rem 0;
-            font-weight: bold;
+            margin:0 2rem 0.4rem 0;
+            font-weight: normal;
           }
           .faq_icon{
             position: absolute;
@@ -170,7 +171,7 @@ a{
             transition: 0.3s ease-in;
             color: #000;
             font-size: 1rem;
-            margin:0.5rem 2rem 0.5rem 0.3rem;
+            margin:0.5rem 2rem 0.4rem 0.4rem;
             display: none;
           }
           .rotate{
@@ -185,19 +186,29 @@ a{
 
 @media(max-width: 768px) {
   .container {
-    .main-area{
-      h1{
-        font-size: 3rem;
-        margin-bottom: 2rem;
+    .wrapper1 {
+
+      .navbar{
+        img{
+          height: 80px;
+          width: fit-content;
+          margin: 0.3rem 0 0 1rem;
+        }
       }
-      .description{
-        font-size: 1rem;
-        margin: 2rem 0;
-      }
-      
-      ion-button{
-        font-size: 1.1rem;
-        --border-radius: 12px;
+      .main-area{
+        h1{
+          font-size: 3rem;
+          margin-bottom: 2rem;
+        }
+        .description{
+          font-size: 1rem;
+          margin: 2rem 0;
+        }
+        
+        ion-button{
+          font-size: 1.1rem;
+          --border-radius: 12px;
+        }
       }
     }
   }
@@ -214,10 +225,9 @@ a{
           opacity: 1;
         }
 
-        h1{
-          font-size: 1.7rem;
-          margin-left: 0;
-          margin-bottom: 0.5rem;
+        img{
+          height: 60px;
+          margin: 0.3rem 0 0 0;
         }
   
         ul{
@@ -228,6 +238,11 @@ a{
           
           li{
             padding: 0.5rem 0;
+
+            a{
+              margin-left: 1rem;
+              font-size: 1rem;
+            }
           }
         }
         

@@ -33,7 +33,7 @@ export class UtilService {
       else if(time == 'tomorrow') {
         dateToCalculate = new Date(+new Date().setHours(23, 59, 59, 59) + 1*86400000)
       }
-      else if(time == 'weak') {
+      else if(time == 'week') {
         dateToCalculate = new Date(+new Date().setHours(23, 59, 59, 59) + 7*86400000)
       }
       else if(time == 'month') {

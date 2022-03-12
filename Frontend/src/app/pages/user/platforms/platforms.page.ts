@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UserService } from 'src/app/services/user.service';
@@ -9,16 +10,18 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './platforms.page.html',
   styleUrls: ['./platforms.page.scss'],
 })
-export class PlatformsPage implements OnInit {
 
+export class PlatformsPage implements OnInit {
   platforms = new Array();
+  userPlatformData = new Array();
   platformForm: FormGroup
 
   constructor(
     private _userSerive: UserService,
     private _loaderService: LoaderService,
     private _formBuilder: FormBuilder,
-    private _alertService: AlertService
+    private _alertService: AlertService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -31,26 +34,48 @@ export class PlatformsPage implements OnInit {
   }
 
   showCard(data) {
-    this.platformForm.controls['platformName'].setValue(data)
+    this.platformForm.controls['platformName'].setValue(data.key)
+    this.platformForm.controls['username'].setValue(data.value)
     let card = document.getElementById('modal')
     card.style.display = 'block';
   }
 
   hideCard() {
     this.platformForm.controls['platformName'].setValue(null)
+    this.platformForm.controls['username'].setValue(null)
     let card = document.getElementById('modal')
     card.style.display = 'none';
   }
 
+  extractNull(data) {
+    // this.platforms = new Array()
+    // for(let prop in data) {
+    //   if(!data[prop])
+    //     this.platforms.push(prop)
+    // }
+  }
+
+  navigateTo(data) {
+  }
+
   getplatform() {
-    this.platforms = new Array()
-    this._userSerive.getPlatforms().subscribe(data => {
-      console.log(data['platformData'].platform)
-      for(let prop in data['platformData'].platform) {
-        if(!data['platformData'].platform[prop])
-          this.platforms.push(prop)
-      }
+    this._userSerive.getPlatforms().subscribe(
+      async data => {
+      this.platforms = await data['platformData'].platform
+      this._loaderService.isLoading.next(false)
+      // await this.getUserPlatformData()
     })
+  }
+
+  getUserPlatformData() {
+    for(let prop in this.platforms) {
+      
+      if(this.platforms[prop]) {
+        this._userSerive.getUserDetails(prop, this.platforms[prop]).subscribe( data => {
+          console.log(data)
+        })
+      }
+    }
     this._loaderService.isLoading.next(false)
   }
 
@@ -67,6 +92,10 @@ export class PlatformsPage implements OnInit {
               this.hideCard()
             }
           )
+        }
+        if(data["status"]=="FAILED") {
+          this._alertService.presentToast(data['comment'], 'danger')
+          this.hideCard()
         }
         this._loaderService.isLoading.next(false)
       }

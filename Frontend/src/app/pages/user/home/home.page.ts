@@ -41,15 +41,12 @@ export class HomePage implements OnInit {
     ul.classList.toggle('active')
   }
 
-  showFAQAnswer() {
-    let ele = document.getElementsByClassName('faq_icon');
-  }
-
   async getUpcomingContest() {
     await this._contestService.upcomingContest().subscribe(
       async data => {
         let platformsData = await this._utilService.extractPlatforms(data, this.platforms)
         this.contests = await this._utilService.convertDateinIST(platformsData)
+        this._loaderService.isLoading.next(false)
       }
     )
   }

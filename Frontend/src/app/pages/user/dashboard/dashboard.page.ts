@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContestService } from 'src/app/services/contest.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -16,17 +17,26 @@ export class DashboardPage implements OnInit {
   time = new Array()
   registeredPlatform = 0;
   value = 0;
+  name
+  username
 
   constructor(
     private _contestService: ContestService,
     private _utilService: UtilService,
     private _loaderService: LoaderService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _tokenService: TokenService
   ) { }
 
   ngOnInit() {
+    this.getUserData()
     this.getUpcomingContest()
     this.getPlatforms()
+  }
+
+  getUserData() {
+    this.name = this._tokenService.getName();
+    this.username = this._tokenService.getUserName();
   }
 
   platformChange(data) {

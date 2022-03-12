@@ -26,7 +26,7 @@ ion-content{
         flex-direction: row;
         justify-content: space-evenly;
         ion-button{
-          margin-top: 1rem;
+          margin-top: 1.5rem;
           height: 40px;
           width: 100px;
           --border-radius: 15px !important;
@@ -35,6 +35,23 @@ ion-content{
           --background: #000;
           color: #fff;
         }
+      }
+    }
+  }
+
+  ion-fab{
+    margin-bottom: 1rem;
+    ion-fab-button{
+      --background: #000 !important;
+      ion-icon{
+        font-size: 30px !important;
+      }
+    }
+    
+    .fab-item{
+      --background: #fff !important;
+      img{
+        padding: 0.3rem;
       }
     }
   }
