@@ -24,7 +24,11 @@ export class UserService {
     return this._http.put(this._env.Mongo_API_URL+'/platform/updateplatform', {platformName, username}, this.httpOptions)
   }
 
-  getUserDetails(platformName, username) {
-    return this._http.get(this._env.User_API_URL+`/${platformName}/${username}`, this.httpOptions)
+  getUserDetails1(platform, username) {
+    return this._http.get(this._env.User_API_URL1+`/${platform}/${username}`, this.httpOptions)
+  }
+  
+  getUserDetails2(platform, username) {
+    return this._http.get(this._env.User_API_URL2+`/${platform}/${username}`, this.httpOptions)
   }
 }

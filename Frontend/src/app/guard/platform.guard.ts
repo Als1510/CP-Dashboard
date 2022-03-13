@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoaderService } from '../services/loader.service';
-import { UserService } from '../services/user.service';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { TokenService } from '../services/token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +8,11 @@ import { UserService } from '../services/user.service';
 export class PlatformGuard implements CanActivate{
   
   constructor(
-    private _userService: UserService,
-    private _route: Router
+    private _tokenService: TokenService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let platform = JSON.parse(localStorage.getItem('platform'))
+    let platform = this._tokenService.getPlatform()
     if(platform)
       if(platform[Object.keys(platform)[0]])
         return true

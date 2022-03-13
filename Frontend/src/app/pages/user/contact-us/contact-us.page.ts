@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
-import { NetlifyFormService } from 'src/app/services/netlifyForm.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -15,27 +14,19 @@ export class ContactUsPage implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _alertService: AlertService,
-    private _netlifyFormService: NetlifyFormService
   ) { }
 
   ngOnInit() {
     this.contactForm = this._formBuilder.group({
-      name: ["John Doe", Validators.required],
-      email: ["johndoe@gmail.com", Validators.required],
-      contactNo: ["123"],
-      message: ["Hello", Validators.required],
+      name: ["", Validators.required],
+      email: ["", Validators.required],
+      contactNo: [""],
+      message: ["", Validators.required],
     })
   }
 
   onSubmit() {
-    this._netlifyFormService.submitForm(this.contactForm.value).subscribe(
-      data=> {
-        console.log(data)
-      }, error => {
-        console.log(error)
-      }
-    )
-    // this._alertService.presentToast('Form submitted successfully. We\' contact you soon', 'success')
-    // this.contactForm.reset()
+    this._alertService.presentToast('Form submitted successfully. We\' contact you soon', 'success')
+    this.contactForm.reset()
   }
 }

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CodeforcesComponent } from './codeforces.component';
+import { CodeforcesPage } from './codeforces.page';
 
-describe('CodeforcesComponent', () => {
-  let component: CodeforcesComponent;
-  let fixture: ComponentFixture<CodeforcesComponent>;
+describe('CodeforcesPage', () => {
+  let component: CodeforcesPage;
+  let fixture: ComponentFixture<CodeforcesPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeforcesComponent ],
+      declarations: [ CodeforcesPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CodeforcesComponent);
+    fixture = TestBed.createComponent(CodeforcesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

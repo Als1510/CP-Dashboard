@@ -17,6 +17,6 @@ import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component
     ReactiveFormsModule,
     PlatformsPageRoutingModule
   ],
-  declarations: [PlatformsPage, MenubuttonComponent]
+  declarations: [PlatformsPage, MenubuttonComponent], 
 })
 export class PlatformsPageModule {}

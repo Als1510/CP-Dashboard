@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AtcoderComponent } from './atcoder.component';
+import { SpojPage } from './spoj.page';
 
-describe('AtcoderComponent', () => {
-  let component: AtcoderComponent;
-  let fixture: ComponentFixture<AtcoderComponent>;
+describe('SpojPage', () => {
+  let component: SpojPage;
+  let fixture: ComponentFixture<SpojPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AtcoderComponent ],
+      declarations: [ SpojPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AtcoderComponent);
+    fixture = TestBed.createComponent(SpojPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class PlatformsPage implements OnInit {
     private _formBuilder: FormBuilder,
     private _alertService: AlertService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _tokenService: TokenService
   ) { }
 
   ngOnInit() {
@@ -48,19 +50,11 @@ export class PlatformsPage implements OnInit {
     card.style.display = 'none';
   }
 
-  extractNull(data) {
-    // this.platforms = new Array()
-    // for(let prop in data) {
-    //   if(!data[prop])
-    //     this.platforms.push(prop)
-    // }
-  }
-
   navigateTo(data) {
     let platformData = {
       [data]: this.platforms[data]
     }
-    localStorage.setItem("platform", JSON.stringify(platformData))
+    this._tokenService.setPlatform(platformData)
     this._router.navigate([data], {relativeTo: this._route})
   }
 
@@ -77,7 +71,7 @@ export class PlatformsPage implements OnInit {
     for(let prop in this.platforms) {
       
       if(this.platforms[prop]) {
-        this._userSerive.getUserDetails(prop, this.platforms[prop]).subscribe( data => {
+        this._userSerive.getUserDetails1(prop, this.platforms[prop]).subscribe( data => {
           console.log(data)
         })
       }
@@ -88,23 +82,13 @@ export class PlatformsPage implements OnInit {
   onSubmit() {
     let platformName = this.platformForm.get('platformName').value
     let username = this.platformForm.get('username').value
-    this._userSerive.getUserDetails(platformName, username).subscribe(
-      data => {
-        if(data["status"]==="OK") {
-          this._userSerive.updatePlatform(platformName, username).subscribe(
-            data=>{
-              this._alertService.presentToast(data['msg'], 'success')
-              this.getplatform()
-              this.hideCard()
-            }
-          )
-        }
-        if(data["status"]=="FAILED") {
-          this._alertService.presentToast(data['comment'], 'danger')
-          this.hideCard()
-        }
-        this._loaderService.isLoading.next(false)
+    this._userSerive.updatePlatform(platformName, username).subscribe(
+      data=>{
+        this._alertService.presentToast(data['msg'], 'success')
+        this.getplatform()
+        this._loaderService.isLoading.next(false)  
       }
-    )
+      )
+    this.hideCard()
   }
 }

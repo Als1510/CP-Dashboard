@@ -34,6 +34,14 @@ export class TokenService {
     return localStorage.getItem('id')
   }
 
+  setPlatform(data: object) {
+    localStorage.setItem('platform', JSON.stringify(data))
+  }
+
+  getPlatform() {
+    return JSON.parse(localStorage.getItem('platform'))
+  }
+
   saveNameIdUserName(name, id, username) {
     localStorage.removeItem('name')
     localStorage.removeItem('id')

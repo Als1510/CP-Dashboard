@@ -1,22 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PlatformGuard } from 'src/app/guard/platform.guard';
-import { AtcoderComponent } from './atcoder/atcoder.component';
-import { CodeforcesComponent } from './codeforces/codeforces.component';
-
 import { PlatformsPage } from './platforms.page';
-import { SpojComponent } from './spoj/spoj.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       { path: '', pathMatch: 'full', component: PlatformsPage },
-      { path: 'codeforces', component: CodeforcesComponent, canActivate:[PlatformGuard] },
-      { path: 'spoj', component: SpojComponent, canActivate: [PlatformGuard] },
-      { path: 'atcoder', component: AtcoderComponent, canActivate: [PlatformGuard] },
+      {
+        path: 'codeforces',
+        loadChildren: () => import('./codeforces/codeforces.module').then( m => m.CodeforcesPageModule),
+        canActivate: [PlatformGuard]
+      },
+      {
+        path: 'spoj',
+        loadChildren: () => import('./spoj/spoj.module').then( m => m.SpojPageModule),
+        canActivate: [PlatformGuard]
+      },
+      {
+        path: 'atcoder',
+        loadChildren: () => import('./atcoder/atcoder.module').then( m => m.AtcoderPageModule),
+        canActivate: [PlatformGuard]
+      }
     ]
-  }
+  },
 ];
 
 @NgModule({

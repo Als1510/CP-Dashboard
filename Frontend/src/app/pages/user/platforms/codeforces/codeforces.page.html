@@ -1,0 +1,79 @@
+<ion-content>
+  <div class="header">
+    <img src="../../../../../assets/Platforms/codeforces.png" alt="">
+    <h1>Codeforces</h1>
+  </div>
+  <div class="container">
+    <ion-card class="wrapper1" *ngIf="loaded1">
+      <div class="user-image">
+        <img [src]="userData1.avatar" alt="">
+      </div>
+  
+      <div class="user-details">
+        <!-- all cp Platforms -->
+        <p id="rank">{{userData1.rank}}</p>
+        <!-- rank -->
+        <p id="username">{{userData1.handle}}</p> 
+        <!-- handle -->
+        <div class="name-city">
+          <p id="name">{{userData1.firstName}} {{userData1.lastName}}</p>
+          <!-- firstName, lastName -->
+          <p id="address">{{userData1.city}}, {{userData1.country}}</p>
+          <!-- city, country -->
+        </div>
+        <div class="contest-rating">
+          <img src="../../../../../assets/Utils/codefoces_contest_rating.png" alt="">
+          <p><span class="p-main">Contest rating:</span> {{userData1.rating}}</p>
+          <!-- rating -->
+          <p id="max-rating">(<span class="p-main">max.</span> {{userData1.maxRank}}, {{userData1.maxRating}})</p>
+          <!-- rank, maxRating -->
+        </div>
+        <div class="contribution">
+          <img src="../../../../../assets/Utils/codefoces_contributions.png" alt="">
+          <p><span class="p-main">Contribution:</span> {{userData1.contribution}}</p>
+          <!-- contribution -->
+        </div>
+        <div class="friends">
+          <img src="../../../../../assets/Utils/codefoces_friends_of.png" alt="">
+          <p><span class="p-main">Friend of:</span> {{userData1.friendOfCount}} users</p>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card class="wrapper2" *ngIf="loaded2">
+      <ion-list class="contest_heading_header">
+        <ion-label class="contest_heading_label">
+          Contest Name
+        </ion-label>
+        <ion-label class="contest_heading_label">
+          Rank
+        </ion-label>
+        <ion-label class="contest_heading_label mobile">
+          New Rating
+        </ion-label>
+        <ion-label class="contest_heading_label duration mobile">
+          Ranting Change
+        </ion-label>
+        <ion-label class="contest_heading_label duration">
+          Solved
+        </ion-label>
+      </ion-list>
+      <ion-list *ngFor="let contest of userData2">
+        <ion-label>
+          {{contest.contest}}
+        </ion-label>
+        <ion-label>
+          {{contest.rank}}
+        </ion-label>
+        <ion-label class="mobile">
+          {{contest.newRating}}
+        </ion-label>
+        <ion-label class="mobile">
+          {{contest.ratingChange}}
+        </ion-label>
+        <ion-label>
+          {{contest.solved}}
+        </ion-label>
+      </ion-list>
+    </ion-card>
+  </div>
+</ion-content>
