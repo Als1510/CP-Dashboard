@@ -15,19 +15,10 @@ export class PlatformGuard implements CanActivate{
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // let platform = childRoute.url[0].path
-    console.log(route.params)
-    // this._userService.getPlatforms().subscribe(
-    //   data => {
-    //     let platformData = data['platformData'].platform
-    //     for(let prop in platformData) {
-    //       if(prop == platform) {
-    //         this._loaderService.isLoading.next(false)
-    //         return true;
-    //       }
-    //     }
-    //   }
-    // )
+    let platform = JSON.parse(localStorage.getItem('platform'))
+    if(platform)
+      if(platform[Object.keys(platform)[0]])
+        return true
     return false;
   }
 }

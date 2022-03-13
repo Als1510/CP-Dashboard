@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { UserService } from 'src/app/services/user.service';
@@ -21,7 +21,8 @@ export class PlatformsPage implements OnInit {
     private _loaderService: LoaderService,
     private _formBuilder: FormBuilder,
     private _alertService: AlertService,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -56,6 +57,11 @@ export class PlatformsPage implements OnInit {
   }
 
   navigateTo(data) {
+    let platformData = {
+      [data]: this.platforms[data]
+    }
+    localStorage.setItem("platform", JSON.stringify(platformData))
+    this._router.navigate([data], {relativeTo: this._route})
   }
 
   getplatform() {
