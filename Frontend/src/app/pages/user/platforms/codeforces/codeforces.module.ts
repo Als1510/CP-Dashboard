@@ -7,13 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { CodeforcesPageRoutingModule } from './codeforces-routing.module';
 
 import { CodeforcesPage } from './codeforces.page';
-
+ 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CodeforcesPageRoutingModule
+    CodeforcesPageRoutingModule,
   ],
   declarations: [CodeforcesPage]
 })

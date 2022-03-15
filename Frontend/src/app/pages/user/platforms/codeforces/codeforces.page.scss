@@ -1,3 +1,7 @@
+ion-card{
+  padding: 0 !important;
+  margin: 0 !important;
+}
 ion-content{
   box-sizing: border-box;
   position: absolute;
@@ -22,86 +26,111 @@ ion-content{
   }
   
   .container{
-    width: 100%;
+    width: calc(100% - 5px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     
-    ion-card{
-      margin: 0.5rem 0.3rem !important;
+    .box{
+      margin: 1rem 0;
       width: 100%;
-    }
-    
-    .wrapper1{
-      max-width: 1100px;
-      padding: 1.5rem 1rem !important;
       display: grid;
-      grid-template-columns: .5fr 1fr;
-      justify-content: center;
-      align-items: center;
-      .user-image{
-        justify-self: center;
-        width: fit-content;
-        img{
-          height: 180px;
-        }
-      }
+      grid-gap: 1rem;
+      grid-template-columns: 75% 24%;
+      justify-content: space-evenly;
 
-      .user-details{
-        justify-self: center;
-        margin-left: 1rem;
-        p{
-          font-size: 1rem;
-          margin: 0.5rem 0;
-          padding: 0;
-          .p-main{
-            color: #000;
-            font-weight: 200;
+      .wrapper1{
+        order: 1;
+        padding: 1rem 0.5rem !important;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+        .user-image{
+          justify-self: center;
+          width: fit-content;
+          img{
+            height: 180px;
+            border-radius: 12px;
           }
         }
-        
-        #rank{
-          font-size: 1rem;
-          font-weight: bold;
-        }
-        
-        #username{
-          font-size: 1.5rem;
-          font-weight: bold;
-        }
-        
-        .name-city, .contest-rating, .contribution, .friends{
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-        
-        .name-city{
+  
+        .user-details{
+          align-items: flex-start;
+          margin-left: 0.5rem;
+          p{
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            padding: 0;
+            .p-main{
+              color: #000;
+              font-weight: 200;
+            }
+          }
+          
+          #rank{
+            font-size: 1rem;
+            font-weight: bold;
+          }
+          
+          #username{
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+          
+          .contest-rating, .contribution, .friends{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          
           #name{
             margin-right: 0.4rem;
           }
-        }
-        
-        #max-rating{
-          margin-left: 0.3rem;
-        }
-        
-        .contest-rating, .contribution, .friends{
-          margin: 0.5rem 0;
-          img{
-            height: 25px;
-            margin-right: 0.5rem;
+          
+          #max-rating{
+            margin-left: 0.3rem;
+          }
+
+          .name-city, .contest-rating-max-rating{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          
+          .name-city, .contest-rating, .contribution, .friends{
+            margin: 0.5rem 0;
+            img{
+              height: 25px;
+              margin-right: 0.5rem;
+            }
+          }
+  
+          #max-rating{
+            font-size: 0.9rem;
           }
         }
+      }
 
-        #max-rating{
-          font-size: 0.9rem;
+      .wrapper2{
+        padding: 1rem 0.5rem !important;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        h1{
+          position: relative;
+          top: 5px;
+          left: 15px;
+        }
+        canvas{
+          align-self: center;
+          margin: 2rem 1rem;
         }
       }
     }
 
-    .wrapper2{
+    .wrapper3{
       margin: 1rem 0.2rem 0.2rem 0.1rem;
       .contest_heading_header{
         .contest_heading_label{
@@ -125,70 +154,203 @@ ion-content{
       }
     }
   }
+
+  .noData{
+    padding: 2rem 0 !important;
+    width: 100%;
+    p{
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+}
+
+@media(max-width: 1000px) {
+  ion-content{ 
+    .container{
+      width: calc(100% - 5px);
+      .box{
+        width: 100%;
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr;
+        justify-content: center;
+  
+        .wrapper1{
+          order: 0;
+          padding: 1rem 0.5rem !important;
+          display: grid;
+          grid-template-columns: 40% 50%;
+          grid-gap: 1rem;
+          justify-content: space-evenly;
+          align-items: center;
+          .user-image{
+            justify-self: center;
+            width: fit-content;
+            img{
+              height: 180px;
+              border-radius: 12px;
+            }
+          }
+    
+          .user-details{
+            align-items: center;
+            margin-left: 1rem;
+            p{
+              font-size: 1rem;
+              margin: 0.5rem 0;
+              padding: 0;
+              .p-main{
+                color: #000;
+                font-weight: 200;
+              }
+            }
+            
+            #rank{
+              font-size: 1rem;
+              font-weight: bold;
+            }
+            
+            #username{
+              font-size: 1.5rem;
+              font-weight: bold;
+            }
+            
+            .contest-rating, .contribution, .friends{
+              flex-direction: row;
+              align-items: center;
+            }
+            
+            #name{
+              margin-right: 0.4rem;
+            }
+            
+            #max-rating{
+              margin-left: 0.3rem;
+            }
+  
+            .name-city, .contest-rating-max-rating{
+              flex-direction: row;
+              align-items: center;
+            }
+            
+            .name-city, .contest-rating, .contribution, .friends{
+              margin: 0.5rem 0;
+              img{
+                height: 25px;
+                margin-right: 0.5rem;
+              }
+            }
+    
+            #max-rating{
+              font-size: 0.9rem;
+            }
+          }
+        }
+  
+        .wrapper2{
+          height: auto;
+          width: 100%;
+          padding: 0.5rem !important;
+          margin-left: 1rem;
+          display: grid;
+          h1{
+            position: relative;
+            top: 5px;
+            left: 15px;
+          }
+          canvas{
+            align-self: center;
+            margin: 2rem 1rem;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media(max-width: 480px) {
   ion-content{    
     .container{
-      .wrapper1{
-        padding: 1rem 0.5rem !important;
-        grid-template-columns: 1fr;
-        .user-image{
-          max-width: 80%;
-        }
-  
-        .user-details{
-          margin-top: 1rem;
-          margin-left: 0.3rem;
-          p{
-            font-size: 0.9rem;
-            .p-main{
-              color: #000;
-              font-weight: 200;
+      .box{
+        .wrapper1{
+          padding: 1rem 0.5rem !important;
+          grid-template-columns: 1fr;
+          
+          .user-details{
+            justify-self: center;
+            p{
+              font-size: 1rem;
+              margin: 0.5rem 0;
+              padding: 0;
+              .p-main{
+                color: #000;
+                font-weight: 200;
+              }
             }
-          }
-          
-          #rank{
-            font-size: 1rem;
-            font-weight: bold;
-          }
-          
-          #username{
-            font-size: 1.5rem;
-            font-weight: bold;
-          }
-          
-          .name-city, .contest-rating, .contribution, .friends{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-          }
-          
-          .name-city{
+            
+            #rank{
+              font-size: 1rem;
+              font-weight: bold;
+            }
+            
+            #username{
+              font-size: 1.5rem;
+              font-weight: bold;
+            }
+            
+            .contest-rating, .contribution, .friends{
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            
             #name{
               margin-right: 0.4rem;
             }
-          }
-          
-          #max-rating{
-            margin-left: 0.3rem;
-          }
-          
-          .contest-rating, .contribution, .friends{
-            margin: 0.5rem 0;
-            img{
-              height: 25px;
-              margin-right: 0.5rem;
+            
+            #max-rating{
+              margin-left: 0.3rem;
+            }
+  
+            .name-city, .contest-rating-max-rating{
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+            }
+            
+            .name-city, .contest-rating, .contribution, .friends{
+              margin: 0.5rem 0;
+              img{
+                height: 25px;
+                margin-right: 0.5rem;
+              }
+            }
+    
+            #max-rating{
+              font-size: 0.9rem;
             }
           }
-  
-          #max-rating{
-            font-size: 0.9rem;
+        }
+        .wrapper2{
+          height: auto;
+          width: 100%;
+          padding: 0.5rem !important;
+          margin-left: 1rem;
+          display: grid;
+          h1{
+            position: relative;
+            top: 5px;
+            left: 15px;
+          }
+          canvas{
+            align-self: center;
+            margin: 1rem 0.5rem;
           }
         }
       }
 
-      .wrapper2{
+      .wrapper3{
         ion-list{
           grid-template-columns: 1.7fr 1fr 1fr;
           padding: 0.7rem 0;

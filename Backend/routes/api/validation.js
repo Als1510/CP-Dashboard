@@ -18,7 +18,7 @@ router.get('/verify/:uniqueString', async (req, res) => {
 
   if(user) {
     await User.updateOne({_id: user._id}, {$set: {active: true}})
-    res.redirect("https://cp-dashboard.netlify.app");
+    res.sendFile(path.join(__dirname + '../../../config/activationResponseSuccess.html'))
   } else {
     res.sendFile(path.join(__dirname + '../../../config/activationResponseFailure.html'))
   }

@@ -56,5 +56,6 @@ export class TokenService {
     localStorage.removeItem('name')
     localStorage.removeItem('id')
     localStorage.removeItem('username')
+    localStorage.removeItem('platform')
   }
 }

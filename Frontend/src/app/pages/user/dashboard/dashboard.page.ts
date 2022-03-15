@@ -62,7 +62,7 @@ export class DashboardPage implements OnInit {
       data => {
         for(let prop in data['platformData'].platform) {
           if(data['platformData'].platform[prop])
-            this.registeredPlatform++
+          this.registeredPlatform++
         }
         this.value = 20*this.registeredPlatform
         this._loaderService.isLoading.next(false);
