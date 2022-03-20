@@ -1,0 +1,208 @@
+ion-card{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+ion-content{
+  box-sizing: border-box;
+  position: absolute;
+  top:0;
+  left: 75px;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 75px);
+  height: 100vh;
+  
+  .header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:1rem 0 0 1.3rem;
+
+    img{
+      height: 50px;
+    }
+    h1{
+      margin: 0 0 0 1rem;
+      font-size: 2rem;
+    }
+  }
+  .container{
+    width: calc(100% - 5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .box{
+      margin: 1rem 0;
+      display: grid;
+      height: 100%;
+      width: 100%;
+      grid-template-columns:75% 24%;
+      grid-gap: 1rem;
+      justify-content: space-evenly;
+      .wrapper1{ 
+        order: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+        .profile{
+          display: flex; 
+          flex-direction: row;
+          align-items: center;
+          padding: 1rem !important;
+          img{
+            height: 70px;
+            border-radius: 12px;
+          }
+          .user{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 2rem;
+
+            p{
+              margin: 0;
+            }
+
+            .username{
+              margin-bottom: 1rem;
+            }
+
+            .rank{
+              font-size: 1rem;
+              align-self: flex-end;
+              justify-self: flex-end;
+              .no{
+                margin-left: 0.2rem;
+                color: #000;
+              }
+            }
+          }
+        }
+
+        .problems{
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-gap: 1rem;
+
+          ion-card{
+            padding: 1rem !important;
+            p{
+              margin: 0;
+            }
+
+            h2{
+              margin-bottom: 1rem !important;
+            }
+
+            .score{
+              margin: 1.5rem 0 0.2rem 0 !important;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+
+              .no{
+                color: #000;
+                font-size: 1rem;
+              }
+            }
+
+          }
+
+          .easy{
+            ion-progress-bar{
+              --buffer-background: #E0F4E7;
+              --progress-background: #00AF9B;
+            }
+          }
+          .medium{
+            ion-progress-bar{
+              --buffer-background: #FFF4D9;
+              --progress-background: #FFB904;
+            }
+          }
+          .hard{
+            ion-progress-bar{
+              --buffer-background: #FDE4E3;
+              --progress-background: #F9BBBA;
+            }
+          }
+        }
+      }
+      .wrapper2{
+        padding: 1rem 0.5rem !important;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h1{
+          position: absolute;
+          top:10px;
+          left: 15px;
+          margin: 0;
+        }
+        .canvas{
+          margin-top: 1rem;
+          width:100%;
+          canvas{
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+  .noData{
+    padding: 2rem 0 !important;
+    width: 100%;
+    p{
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+}
+
+@media(max-width: 1000px) {
+  ion-content{
+    .container{  
+      .box{
+        grid-template-columns:100%;
+        .wrapper1{ 
+          order: 0;
+          .profile{
+            width: 400px;
+          }
+          .problems{
+            grid-template-columns: repeat(auto-fit,minmax(230px, 1fr));
+          }
+        }
+        
+        .wrapper2{
+          .canvas{
+            margin-top: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  ion-content{
+    .container{  
+      .box{
+        grid-template-columns:100%;
+        .wrapper1{ 
+          order: 0;
+          .profile{
+            width: 100%;
+          }
+          .problems{
+            grid-template-columns: repeat(auto-fit,minmax(230px, 1fr));
+          }
+        }
+      }
+    }
+  }
+}

@@ -28,8 +28,8 @@ export class CodeforcesPage implements OnInit {
     private _tokenService: TokenService,
     private _loderService: LoaderService,
     private _utilService: UtilService
-    ) {
-      Chart.register(...registerables)
+  ) {
+    Chart.register(...registerables)
   }
 
   async ngOnInit() {

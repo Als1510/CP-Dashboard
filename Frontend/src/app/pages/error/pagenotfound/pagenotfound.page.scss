@@ -1,0 +1,58 @@
+ion-content{
+  height: 100vh;
+  width: 100vw;
+  .container{
+    height: 100%;
+    width: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    img{
+      height: 60%;
+      justify-self: center;
+      border-radius: 12%;
+    }
+    .message{
+      justify-self: center;
+      p{
+        padding: 0;
+        margin: 0;
+      }
+      .error{
+        font-size: 3rem;
+        font-weight: bold;
+      }
+      .msg{
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 650px) {
+  ion-content{
+    .container{
+      flex-direction: column;
+      padding: 1rem;
+      align-items: center;
+      justify-content: center;
+      img{
+        height: auto;
+        width: 50vw;
+      }
+      .message{
+        margin-top: 3rem;
+        align-self: center;
+        .error{
+          font-size: 3rem;
+          font-weight: bold;
+        }
+        .msg{
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}

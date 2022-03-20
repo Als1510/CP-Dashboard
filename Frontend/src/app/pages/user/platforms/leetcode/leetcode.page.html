@@ -1,0 +1,56 @@
+<ion-content>
+  <div class="header">
+    <img src="../../../../../assets/Platforms/leetcode.png" alt="">
+    <h1>Leetcode</h1>
+  </div>
+  <div class="container" *ngIf="userData; else noData">
+    <div class="box">
+      <div class="wrapper1">
+        <ion-card class="profile">
+          <img src="../../../../../assets/Utils/leetcode_avatar.jpg" alt="">
+          <div class="user">
+            <p class="username">als1510</p>
+            <p class="rank">Rank<span class="no"> {{userData.ranking}}</span></p>
+          </div>
+        </ion-card>
+        <div class="problems">
+          <ion-card class="easy">
+            <h2>Easy</h2>
+            <div class="score">
+              <p><span class="no">{{userData.easy_questions_solved}}</span>  / {{userData.total_easy_questions}}</p>
+              <p class="beats">Beats: <span>{{userData.easy_acceptance_rate}}</span></p>
+            </div>
+            <ion-progress-bar [value]="easyRate"></ion-progress-bar>
+          </ion-card>
+          <ion-card class="medium">
+            <h2>Medium</h2>
+            <div class="score">
+              <p><span class="no">{{userData.medium_questions_solved}}</span>  / {{userData.total_medium_questions}}</p>
+              <p class="beats">Beats: <span>{{userData.medium_acceptance_rate}}</span></p>
+            </div>
+            <ion-progress-bar [value]="mediumRate"></ion-progress-bar>
+          </ion-card>
+          <ion-card class="hard">
+            <h2>Hard</h2>
+            <div class="score">
+              <p> <span class="no">{{userData.hard_questions_solved}}</span> / {{userData.total_hard_questions}}</p>
+              <p class="beats">Beats: <span>{{userData.hard_acceptance_rate}}</span></p>
+            </div>
+            <ion-progress-bar [value]="hardRate"></ion-progress-bar>
+          </ion-card>
+        </div>
+      </div>
+      <ion-card class="wrapper2">
+        <h1>Problem Solved</h1>
+        <div class="canvas">
+          <canvas id="chart" #pieCanvas></canvas>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+  <ng-template #noData>
+    <ion-card class="noData">
+      <p>No User Data</p>
+    </ion-card>
+  </ng-template>
+</ion-content>

@@ -22,7 +22,12 @@ const routes: Routes = [
         path: 'atcoder',
         loadChildren: () => import('./atcoder/atcoder.module').then( m => m.AtcoderPageModule),
         canActivate: [PlatformGuard]
-      }
+      },
+      {
+        path: 'leetcode',
+        loadChildren: () => import('./leetcode/leetcode.module').then( m => m.LeetcodePageModule),
+        canActivate: [PlatformGuard]
+      },
     ]
   },
 ];
