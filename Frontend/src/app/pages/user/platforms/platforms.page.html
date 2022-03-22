@@ -1,30 +1,46 @@
 <ion-content>
   <h1>Platforms</h1>
-  <div class="wrapper">
-    <ion-card>
-      <p (click)="navigateTo('codeforces')">Codeforces</p>
+  <div class="wrapper" id="wrapper">
+    <ion-card *ngIf="platforms.codeforces">
+      <img src="../../../../assets/Platforms/codeforces.png" alt="">
+      <div class="platform_details">
+        <h2>Codeforces</h2>
+        <p class="user">{{platforms.codeforces}}</p>
+        <ion-button (click)="navigateTo('codeforces')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
     </ion-card>
-    <ion-card>
-      <p (click)="navigateTo('leetcode')">Leetcode</p>
+    <ion-card *ngIf="platforms.leetcode">
+      <img src="../../../../assets/Platforms/leetcode.png" alt="">
+      <div class="platform_details">
+        <h2>Leetcode</h2>
+        <p class="user">{{platforms.leetcode}}</p>
+        <ion-button (click)="navigateTo('leetcode')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
     </ion-card>
-    <ion-card>
-      <p (click)="navigateTo('spoj')">Spoj</p>
+    <ion-card *ngIf="platforms.spoj">
+      <img src="../../../../assets/Platforms/spoj.png" alt="">
+      <div class="platform_details">
+        <h2>Spoj</h2>
+        <p class="user">{{platforms.spoj}}</p>
+        <ion-button (click)="navigateTo('spoj')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
     </ion-card>
-    <ion-card>
-      <p (click)="navigateTo('atcoder')">Atcoder</p>
+    <ion-card *ngIf="platforms.atcoder">
+      <img src="../../../../assets/Platforms/atcoder.png" alt="">
+      <div class="platform_details">
+        <h2>Atcoder</h2>
+        <p class="user">{{platforms.atcoder}}</p>
+        <ion-button (click)="navigateTo('atcoder')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
     </ion-card>
-    <!-- <ion-card>
-      <p (click)="navigateTo('spoj')">SPOJ</p>
+    <ion-card *ngIf="platforms.codechef">
+      <img src="../../../../assets/Platforms/codechef.png" alt="">
+      <div class="platform_details">
+        <h2>Codechef</h2>
+        <p class="user">{{platforms.codechef}}</p>
+        <ion-button (click)="navigateTo('codechef')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
     </ion-card>
-    <ion-card>
-      <p (click)="navigateTo('codechef')">CODECHEF</p>
-    </ion-card>
-    <ion-card>
-      <p (click)="navigateTo('atcoder')">ATCODER</p>
-    </ion-card>
-    <ion-card>
-      <p (click)="navigateTo('leetcode')">Leetcode</p>
-    </ion-card> -->
   </div>
   <ion-card class="modal" id="modal">
     <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
@@ -44,7 +60,7 @@
     </form>
   </ion-card>
 
-  <ion-fab vertical="bottom" horizontal="center">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>

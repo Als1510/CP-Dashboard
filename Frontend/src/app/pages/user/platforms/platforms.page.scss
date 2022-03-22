@@ -10,8 +10,49 @@ ion-content{
     font-size: 2rem;
     margin-left: 1.3rem;
   }
+
+  .wrapper{
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    justify-items: center;
+
+    ion-card{
+      width: 100%;
+      max-width: 1000px;
+      padding: 0.5rem 0 !important;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      img{
+        width: 200px;
+      }
+
+      .platform_details{
+        h2{
+          color: #000;
+        }
+        .user{
+          margin: 2rem 0 2rem 1rem;
+          font-size: 1rem;
+        }
+
+        ion-button{
+          text-transform: none;
+          --background: #000;
+          color: #fff;
+          ion-icon{
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
   .modal{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -40,7 +81,7 @@ ion-content{
   }
 
   ion-fab{
-    margin-bottom: 1rem;
+    margin: 0 2rem 1rem 0;
     ion-fab-button{
       --background: #000 !important;
       ion-icon{
@@ -52,6 +93,44 @@ ion-content{
       --background: #fff !important;
       img{
         padding: 0.3rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 600px) {
+  ion-content{
+    .wrapper{
+      margin: 1rem 0.5rem;
+      ion-card{
+        img{
+          width: 150px;
+        }
+  
+        .platform_details{
+          .user{
+            margin: 1.5rem 0 1.5rem 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  ion-content{
+    .wrapper{
+      margin: 1rem 0.5rem;
+      ion-card{
+        img{
+          width: 100px;
+        }
+  
+        .platform_details{
+          .user{
+            margin: 1rem 0 1rem 1rem;
+          }
+        }
       }
     }
   }

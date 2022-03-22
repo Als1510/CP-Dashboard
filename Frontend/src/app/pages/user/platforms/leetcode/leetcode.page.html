@@ -7,10 +7,10 @@
     <div class="box">
       <div class="wrapper1">
         <ion-card class="profile">
-          <img src="../../../../../assets/Utils/leetcode_avatar.jpg" alt="">
+          <img [src]="userData1 ? userData1.matchedUser.profile.userAvatar : '../../../../../assets/Utils/leetcode_avatar.jpg'" alt="">
           <div class="user">
             <p class="username">als1510</p>
-            <p class="rank">Rank<span class="no"> {{userData.ranking}}</span></p>
+            <p class="rank">Rank<span class="no"> {{userData1 ? userData1.matchedUser.profile.ranking : userData.ranking}}</span></p>
           </div>
         </ion-card>
         <div class="problems">
@@ -47,6 +47,19 @@
         </div>
       </ion-card>
     </div>
+    <ion-card class="submission" *ngIf="submissionList.length>0">
+      <h1>Recent Submissions</h1>
+      <ion-list>
+        <ion-label class="submission_header">Problem Name</ion-label>
+        <ion-label class="submission_header">Status</ion-label>
+        <ion-label class="submission_header">Language</ion-label>
+      </ion-list>
+      <ion-list *ngFor="let submission of submissionList">
+        <ion-label class="submission_data">{{submission.title}}</ion-label>
+        <ion-label class="submission_data">{{submission.statusDisplay}}</ion-label>
+        <ion-label class="submission_data">{{submission.lang}}</ion-label>
+      </ion-list>
+    </ion-card>
   </div>
   <ng-template #noData>
     <ion-card class="noData">

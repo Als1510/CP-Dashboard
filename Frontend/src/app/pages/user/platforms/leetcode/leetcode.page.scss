@@ -28,13 +28,14 @@ ion-content{
   }
   .container{
     width: calc(100% - 5px);
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    margin: 1rem 0;
+    grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
+    grid-gap: 1rem;
 
     .box{
-      margin: 1rem 0;
       display: grid;
       height: 100%;
       width: 100%;
@@ -149,6 +150,35 @@ ion-content{
           canvas{
             height: auto;
           }
+        }
+      }
+    }
+
+    .submission{
+      width: 100%;
+      padding: 0.5rem 0.2rem !important;
+
+      h1{
+        margin: 1rem;
+      }
+
+      ion-list{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 0.5rem 0;
+
+        .submission_header{
+          font-size: 1rem;
+          color: #000;
+        }
+        
+        ion-label{
+          padding: 0.2rem 0;
+          width: 33%;
+          text-overflow: ellipsis;
+          text-align: center;
+          align-self: center;
         }
       }
     }
