@@ -6,9 +6,6 @@ const PlatoformSchema = new mongoose.Schema({
     ref: 'user'
   },
   platform: {
-    codechef: {
-      type: String,
-    },
     codeforces: {
       type: String,
     },

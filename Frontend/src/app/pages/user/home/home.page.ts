@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
   ) { }
 
   contests = new Array();
-  platforms = ['codechef', 'codeforces', 'hackerrank', 'harkerearth', 'leetcode']
+  platform = new Array()
   element
   
   ngOnInit() {
@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   async getUpcomingContest() {
     await this._contestService.upcomingContest().subscribe(
       async data => {
-        let platformsData = await this._utilService.extractPlatforms(data, this.platforms)
+        let platformsData = await this._utilService.extractPlatforms(data, this.platform)
         this.contests = await this._utilService.convertDateinIST(platformsData)
         this._loaderService.isLoading.next(false)
       }

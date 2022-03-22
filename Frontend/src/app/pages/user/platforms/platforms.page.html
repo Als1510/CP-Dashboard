@@ -33,14 +33,6 @@
         <ion-button (click)="navigateTo('atcoder')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
       </div>
     </ion-card>
-    <ion-card *ngIf="platforms.codechef">
-      <img src="../../../../assets/Platforms/codechef.png" alt="">
-      <div class="platform_details">
-        <h2>Codechef</h2>
-        <p class="user">{{platforms.codechef}}</p>
-        <ion-button (click)="navigateTo('codechef')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
-      </div>
-    </ion-card>
   </div>
   <ion-card class="modal" id="modal">
     <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
@@ -71,4 +63,3 @@
     </ion-fab-list>
   </ion-fab>
 </ion-content>
-<!-- <ion-router-outlet></ion-router-outlet> -->

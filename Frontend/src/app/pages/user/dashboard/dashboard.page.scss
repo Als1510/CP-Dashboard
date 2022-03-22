@@ -113,7 +113,7 @@ ion-content{
       
       div[role="progressbar"]::before {
         counter-reset: percentage var(--registeredPlatform);
-        content: counter(percentage) '/5';
+        content: counter(percentage) '/4';
       }
     }
   }
