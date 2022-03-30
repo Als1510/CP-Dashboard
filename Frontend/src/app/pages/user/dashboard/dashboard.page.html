@@ -1,27 +1,54 @@
 <ion-content>
   <div class="header">
     <h1>Dashboard</h1>
-    <div class="profile">
+    <div class="profile" (click)="showUser()">
       <div class="profile_details">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <p class="username">{{username}}</p>
+        <ion-icon name="person-circle-outline" id="user" ></ion-icon>
+        <p class="username" id="username">{{username}}</p>
       </div>
-      <p class="name">{{name}}</p>
+      <p class="name" id="name">{{name}}</p>
     </div>
   </div>
   <div class="wrapper1">
-    <!-- <ion-card class="card1 card">
-      <ion-card-content>
-        <p class="wrapper1_heading">50</p>
-        <p class="wrapper1_content">Comments</p>
-      </ion-card-content>
-      <ion-icon name="chatbox-outline"></ion-icon>
-    </ion-card> -->
-    <ion-card class="card2 card">
+    <ion-card class="card1 card">
       <ion-card-content>
         <p class="wrapper1_content">Registered Platforms</p>
       </ion-card-content>
       <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" [style.--value]="value" [style.--registeredPlatform]="registeredPlatform"></div>
+    </ion-card>
+    <ion-card class="card2 card">
+      <ion-slides [options]="slideOpts" pager="false">
+        <ion-slide>
+          <img src="../../../../assets/Utils/img1.png" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../../assets/Utils/img2.png" alt="">
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../../assets/Utils/img3.png" alt="">
+        </ion-slide>
+      </ion-slides>
+    </ion-card>
+    <ion-card class="card3 card">
+      <h3>Platforms Supported</h3>
+      <ion-slides centeredSlides="true" [options]="slideOpts" pager="false">
+        <ion-slide>
+          <img src="../../../../assets/Platforms/codeforces.png" alt="">
+          <h3>Codeforces</h3>
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../../assets/Platforms/atcoder.png" alt="">
+          <h3>Atcoder</h3>
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../../assets/Platforms/leetcode.png" alt="">
+          <h3>Leetcode</h3>
+        </ion-slide>
+        <ion-slide>
+          <img src="../../../../assets/Platforms/spoj.jpg" alt="">
+          <h3>SPOJ</h3>
+        </ion-slide>
+      </ion-slides>
     </ion-card>
   </div>
   <div class="wrapper2">

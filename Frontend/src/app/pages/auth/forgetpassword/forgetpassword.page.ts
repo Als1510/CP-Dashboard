@@ -107,15 +107,15 @@ export class ForgetpasswordPage implements OnInit {
   }
 
   submitEmail() {
-    this.showCard('form2')
-    this.hideCard('form1')
-    this.showTimer = true
-    this.timer(120)
     let email = this.resetPasswordForm.get('email').value.toLowerCase()
     this._authService.requestOtp(email).subscribe(
       data => {
         this._loaderService.isLoading.next(false)
+        this.showCard('form2')
+        this.hideCard('form1')
         this.presentAlert(data['msg'], data['name']);
+        this.showTimer = true
+        this.timer(120)
       }
     )
   }

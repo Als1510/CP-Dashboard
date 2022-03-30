@@ -1,9 +1,61 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>atcoder</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="header">
+    <img src="../../../../../assets/Platforms/atcoder.png" alt="">
+    <h1>Atcoder</h1>
+  </div>
+  <div class="container" *ngIf="userData1; else noData">
+    <ion-card class="wrapper" *ngIf="loaded">
+      <div class="box">
+        <h2>User Profile</h2>
+        <div class="user_details">
+        <p class="username">{{userData2.username}}</p>
+        <div class="level" *ngIf="userData2.level!=NA">
+          <ion-icon name="people-outline"></ion-icon>
+          Level: {{userData2.level}}
+        </div>
+        <div class="rank" *ngIf="userData1.rank || userData2.rank">
+          <ion-icon name="trophy-outline"></ion-icon>
+          Rank: {{userData2.rank ? userData2.rank : userData1.Rank}}
+        </div>
+        <p class="data" *ngIf="userData1.Rating || userData2.rating">Rating: <span>{{userData1.Rating ? userData1.Rating : userData2.rating}}</span></p>
+        <p class="data">Highest Rating: <span>{{userData2.highest}}</span></p>
+        <div class="country">
+          <ion-icon name="globe-outline"></ion-icon>
+          Country/Region: <span>{{userData1.CountryRegion}}</span>
+        </div>
+        <p class="data">Birth Year: <span>{{userData1.BirthYear}}</span></p>
+        <div class="last_compete" *ngIf="userData1.LastCompeted">
+          <ion-icon name="save-outline"></ion-icon>
+          Last Compete: <span>{{userData1.LastCompeted}}</span>
+        </div>
+        <div class="rated_matches" *ngIf="userData1.ratedMatches">
+          <ion-icon name="people-outline"></ion-icon>
+          Rated Matches: <span>{{userData1.ratedMatches}}</span>
+        </div>
+        <div class="affiliation" *ngIf="userData1.Affiliation">
+          <ion-icon name="business-outline"></ion-icon>
+          Affiliation: <span>{{userData1.Affiliation}}</span>
+        </div>
+        <div class="twitter" *ngIf="userData1.TwitterID">
+          <ion-icon name="logo-twitter"></ion-icon>
+          Twitter ID: <span>{{userData1.TwitterID}}</span>
+        </div>
+        <div class="topcoder" *ngIf="userData1.TopCoderID">
+          <img src="../../../../../assets/Platforms/topcoder.png" alt="">
+          Topcoder ID: <span>{{userData1.TopCoderID}}</span>
+        </div>
+        <div class="codeforces" *ngIf="userData1.CodeforcesID">
+          <img src="../../../../../assets/Platforms/codeforces.png" alt="">
+          Codeforces ID: <span>@{{userData1.CodeforcesID}}</span>
+        </div>
+      </div>
+      </div>
+      <img src="../../../../../assets/Utils/leetcode_avatar.jpg" alt="">
+    </ion-card>
+  </div>
+  <ng-template #noData>
+    <ion-card class="noData">
+      <p>No User Data</p>
+    </ion-card>
+  </ng-template>
 </ion-content>

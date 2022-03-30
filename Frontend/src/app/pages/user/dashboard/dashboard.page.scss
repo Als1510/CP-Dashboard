@@ -1,3 +1,7 @@
+ion-slide {
+  width: 100% !important;
+}
+
 ion-content{
   --offset-bottom: auto!important;
   --overflow: hidden;
@@ -35,18 +39,22 @@ ion-content{
         ion-icon{
           font-size: 25px;
           margin-right: 5px;
+          pointer-events: none;
+          cursor: default;
         }
         .username{
           padding: 0;
           margin: 0;
           color: #000;
           font-weight: bold;
+          display: block;
         }
       }
       .name{
         padding: 0;
         margin: 0;
         align-self: flex-end;
+        display: block;
       }
     }
   }
@@ -54,13 +62,14 @@ ion-content{
   .wrapper1{
     margin: 1rem 0.2rem 0 0.1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, min-content));
-    justify-content: flex-start;
+    grid-template-columns: repeat(auto-fit, minmax(400px, min-content));
+    justify-content: center;
     grid-row-gap: 1rem;
     grid-column-gap: 2rem;
 
     .card{
       display: flex;
+      height: 150px;
       flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
@@ -83,7 +92,7 @@ ion-content{
         font-size: 35px;
       }
     }
-    .card2{
+    .card1{
       @keyframes growProgressBar {
         0%, 33% { --pgPercentage: 0; }
         100% { --pgPercentage: var(--value); }
@@ -114,6 +123,29 @@ ion-content{
       div[role="progressbar"]::before {
         counter-reset: percentage var(--registeredPlatform);
         content: counter(percentage) '/4';
+      }
+    }
+
+    .card3{
+      display: grid;
+      grid-template-rows: 10% 90%;
+      h3{
+        font-size: 1rem;
+        margin: 0.4rem 0 0.5rem 0.2rem !important;
+      }
+      grid-row-gap: 1rem;
+      ion-slides{
+        ion-slide{
+          display: flex;
+          align-items: center;
+          justify-content:space-evenly;
+          h3{
+            font-size: 1.5rem;
+          }
+          img{
+            height: 100px;
+          }
+        }
       }
     }
   }
@@ -175,9 +207,6 @@ ion-content{
 
 @media(max-width: 768px) {
   ion-content{
-    .wrapper1{
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
     .wrapper2{
       .contest_header{
         display: flex;
@@ -219,6 +248,48 @@ ion-content{
 
 @media(max-width: 480px) {
   ion-content{
+    .header{
+      .profile{
+        position: absolute;
+        background: #fff;
+        border-radius: 10px;
+        right: 5px;
+        top: 5px;
+        padding: 0.7rem 0 0 0;
+        .profile_details{
+          .username{
+            display: none;
+          }
+          ion-icon{
+            font-size: 35px;
+            cursor: pointer;
+            pointer-events: all;
+            margin: 0;
+          }
+        }
+        .name{
+          display: none;
+        }
+      }
+    }
+
+    .wrapper1{
+      .card3{
+        grid-row-gap: 0.5rem;
+        ion-slides{
+          ion-slide{
+            flex-direction: column;
+            justify-content:center;
+            h3{
+              font-size: 1.2rem;
+            }
+            img{
+              height: 70px;
+            }
+          }
+        }
+      }
+    }
     .wrapper2{
       .contest_header{
         .heading{

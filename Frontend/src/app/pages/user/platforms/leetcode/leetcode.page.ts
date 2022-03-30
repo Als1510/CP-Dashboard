@@ -33,6 +33,7 @@ export class LeetcodePage implements OnInit {
 
   async ngOnInit() {
     this.getData()
+    this._loaderService.isLoading.next(true)
     this.userData1 = await this._userService.getLeetCodeRecentSubmission(this.username)
     this.getUserData1();
     this.getUserData2();

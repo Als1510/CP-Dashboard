@@ -20,6 +20,12 @@ export class DashboardPage implements OnInit {
   name
   username
 
+  slideOpts = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true,
+   };
+
   constructor(
     private _contestService: ContestService,
     private _utilService: UtilService,
@@ -32,6 +38,17 @@ export class DashboardPage implements OnInit {
     this.getUserData()
     this.getUpcomingContest()
     this.getPlatforms()
+  }
+
+  showUser() {
+    document.getElementById('user').style.display = 'none'
+    document.getElementById('username').style.display='block'
+    document.getElementById('name').style.display='block'
+    setTimeout(()=>{
+      document.getElementById('user').style.display = 'block'
+      document.getElementById('username').style.display='none'
+      document.getElementById('name').style.display='none'
+    }, 2500)
   }
 
   getUserData() {

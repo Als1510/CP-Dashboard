@@ -63,8 +63,8 @@ export class CodeforcesPage implements OnInit {
           this.userData2 = data['contests']
         this.ratingArray = this.userData2.map(res => res.newRating).reverse()
         this.contestArray = this.userData2.map(res => res.contest).reverse()
-        this._loderService.isLoading.next(false)
         this.lineChartMethod()
+        this._loderService.isLoading.next(false)
       }
     )
   }
