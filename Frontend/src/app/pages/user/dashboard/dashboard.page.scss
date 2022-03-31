@@ -39,22 +39,21 @@ ion-content{
         ion-icon{
           font-size: 25px;
           margin-right: 5px;
-          pointer-events: none;
           cursor: default;
         }
         .username{
+          display:block;
           padding: 0;
           margin: 0;
           color: #000;
           font-weight: bold;
-          display: block;
         }
       }
       .name{
+        display: block;
         padding: 0;
         margin: 0;
         align-self: flex-end;
-        display: block;
       }
     }
   }
@@ -62,7 +61,7 @@ ion-content{
   .wrapper1{
     margin: 1rem 0.2rem 0 0.1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, min-content));
+    grid-template-columns: repeat(auto-fit, minmax(auto, 400px));
     justify-content: center;
     grid-row-gap: 1rem;
     grid-column-gap: 2rem;
@@ -135,6 +134,7 @@ ion-content{
       }
       grid-row-gap: 1rem;
       ion-slides{
+        width: 100% !important;
         ion-slide{
           display: flex;
           align-items: center;
@@ -207,6 +207,18 @@ ion-content{
 
 @media(max-width: 768px) {
   ion-content{
+    .header{
+      .profile{
+        .profile_details{
+          .username{
+            display: block;
+          }
+        }
+        .name{
+          display: block;
+        }
+      }
+    }
     .wrapper2{
       .contest_header{
         display: flex;
@@ -247,6 +259,9 @@ ion-content{
 }
 
 @media(max-width: 480px) {
+  .hide{
+    display: none;
+  }
   ion-content{
     .header{
       .profile{

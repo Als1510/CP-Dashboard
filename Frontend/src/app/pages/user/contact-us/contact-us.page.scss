@@ -4,6 +4,7 @@ ion-content{
   top:0;
   left: 75px;
   width: calc(100% - 75px);
+  height: 100%;
 
   h1{
     font-size: 2rem;
@@ -11,7 +12,7 @@ ion-content{
   }
 
   .wrapper{
-    margin: 2rem 0.2rem 0.2rem 0.1rem;
+    margin: 2rem 0.2rem 0.5rem 0.1rem;
     ion-card{
       padding: 3rem 0.5rem !important;
       display: flex;
@@ -64,9 +65,9 @@ ion-content{
 @media(max-width: 800px) {
   ion-content{
     .wrapper{
-      margin: 2rem 0 0.2rem 0;
+      margin: 2rem 0.2rem 1rem 0rem;
       ion-card{
-        padding: 2rem 0.3rem !important;
+        padding: 1.5rem 0.3rem !important;
         display: flex;
         flex-direction: column-reverse;
         justify-items: center;

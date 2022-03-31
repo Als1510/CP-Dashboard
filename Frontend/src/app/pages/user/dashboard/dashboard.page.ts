@@ -41,14 +41,16 @@ export class DashboardPage implements OnInit {
   }
 
   showUser() {
-    document.getElementById('user').style.display = 'none'
-    document.getElementById('username').style.display='block'
-    document.getElementById('name').style.display='block'
-    setTimeout(()=>{
-      document.getElementById('user').style.display = 'block'
-      document.getElementById('username').style.display='none'
-      document.getElementById('name').style.display='none'
-    }, 2500)
+    if(document.body.clientWidth<480) {
+      document.getElementById('user').classList.add('hide')
+      document.getElementById('username').style.display='block'
+      document.getElementById('name').style.display='block'
+      setTimeout(()=>{
+        document.getElementById('user').classList.remove('hide')
+        document.getElementById('username').style.display=''
+        document.getElementById('name').style.display=''
+      }, 2500)
+    }
   }
 
   getUserData() {

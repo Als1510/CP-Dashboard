@@ -4,9 +4,83 @@ ion-content{
   top:0;
   left: 70px;
   width: calc(100% - 70px);
+  height: 100%;
 
   h1{
     font-size: 2rem;
     margin-left: 1.3rem;
+  }
+  .container{
+    padding: 2rem;
+    .wrapper{
+      height: 80vh;
+      background: url('../../../../assets/Natural-Wood-Panels-Simple-Background-Image.jpeg') no-repeat center/cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      h1{
+        font-size: 2.5rem;
+        margin-bottom: 4rem;
+      }
+      p{
+        margin: 1rem 3rem;
+      }
+      .para1{
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+      .para2{
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  ion-content{
+    .container{
+      padding: 1.5rem;
+      .wrapper{
+        h1{
+          font-size: 2rem;
+          margin-bottom: 3rem;
+        }
+        p{
+          margin: 1rem 3rem;
+        }
+        .para1{
+          font-size: 1.2rem;
+          margin-bottom: 2rem;
+        }
+        .para2{
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  ion-content{
+    .container{
+      padding: 1.5rem 1rem;
+      .wrapper{
+        h1{
+          font-size: 1.5rem;
+        }
+        p{
+          margin: 1rem 1.5rem;
+        }
+        .para1{
+          font-size: 1rem;
+        }
+        .para2{
+          font-size: 0.8rem;
+        }
+      }
+    }
   }
 }
