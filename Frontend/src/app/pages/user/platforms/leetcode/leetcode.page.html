@@ -9,7 +9,7 @@
         <ion-card class="profile">
           <img [src]="userData1 ? userData1.matchedUser.profile.userAvatar : '../../../../../assets/Utils/leetcode_avatar.jpg'" alt="">
           <div class="user">
-            <p class="username">als1510</p>
+            <p class="username">{{username}}</p>
             <p class="rank">Rank<span class="no"> {{userData1 ? userData1.matchedUser.profile.ranking : userData.ranking}}</span></p>
           </div>
         </ion-card>

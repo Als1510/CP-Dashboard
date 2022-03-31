@@ -9,7 +9,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
-
+app.use(express.static('config'))
 connectDB()
 
 app.use(express.json({extended: false}))

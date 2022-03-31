@@ -34,6 +34,10 @@
       </div>
     </ion-card>
   </div>
+  <div class="noData" *ngIf="!platformEntry">
+    <h1>Add platforms here</h1>
+    <ion-icon name="trending-down-outline"></ion-icon>
+  </div>
   <ion-card class="modal" id="modal">
     <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
       <ion-item>

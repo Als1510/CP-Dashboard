@@ -16,6 +16,7 @@ export class PlatformsPage implements OnInit {
   platforms = new Array();
   userPlatformData = new Array();
   platformForm: FormGroup
+  platformEntry = false
 
   constructor(
     private _userSerive: UserService,
@@ -63,17 +64,14 @@ export class PlatformsPage implements OnInit {
       async data => {
       this.platforms = await data['platformData'].platform
       this._loaderService.isLoading.next(false)
-      // await this.getUserPlatformData()
+      this.getUserPlatformData()
     })
   }
 
   getUserPlatformData() {
     for(let prop in this.platforms) {
-      
       if(this.platforms[prop]) {
-        this._userSerive.getUserDetails1(prop, this.platforms[prop]).subscribe( data => {
-          console.log(data)
-        })
+        this.platformEntry = true
       }
     }
     this._loaderService.isLoading.next(false)

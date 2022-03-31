@@ -51,6 +51,24 @@ ion-content{
     }
   }
 
+  .noData{
+    height: 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    h1{
+      font-size: 3rem;
+      opacity: 0.7;
+    }
+    ion-icon{
+      font-size: 75px;
+      opacity: 0.8;
+      position: absolute;
+      bottom: 25%;
+      right: 25%;
+    }
+  }
+
   .modal{
     position: fixed;
     top: 50%;
@@ -114,6 +132,15 @@ ion-content{
         }
       }
     }
+
+    .noData{
+      h1{
+        font-size: 2.5rem;
+      }
+      ion-icon{
+        font-size: 55px;
+      }
+    }
   }
 }
 
@@ -131,6 +158,16 @@ ion-content{
             margin: 1rem 0 1rem 1rem;
           }
         }
+      }
+    }
+    .noData{
+      h1{
+        font-size: 2rem;
+      }
+      ion-icon{
+       font-size: 45px;
+       bottom: 25%;
+       right: 35%;        
       }
     }
   }
