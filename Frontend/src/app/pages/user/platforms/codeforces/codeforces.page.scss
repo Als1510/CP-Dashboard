@@ -8,7 +8,7 @@ ion-content{
   top:0;
   left: 75px;
   width: calc(100% - 75px);
-  height: 100vh;
+  height: 100%;
   
   .header{
     display: flex;
@@ -34,7 +34,6 @@ ion-content{
     margin: 1rem 0;
     
     .box{
-      margin-bottom: 1rem;
       width: 100%;
       display: grid;
       grid-gap: 1rem;

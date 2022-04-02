@@ -46,6 +46,8 @@
 
   ul{
     margin-top: 20px;
+    margin-bottom: 3rem;
+    overflow-y: scroll;
     width: 100%;
     padding-left: 13px;
     li{
@@ -79,6 +81,7 @@
 
   .logout{
     position: absolute;
+    background-color: #fff;
     bottom: 0;
     display: flex;
     align-items: center;
@@ -88,6 +91,7 @@
     height: 60px;
 
     ion-button{
+      margin-top: 0.3rem !important;
       justify-self: center;
       --background: #fff;
       width: 50px !important;
