@@ -10,7 +10,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.2",
     "nodemailer": "^6.7.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sib-api-v3-sdk": "^8.3.0"
   },
   "name": "backend",
   "version": "1.0.0",
