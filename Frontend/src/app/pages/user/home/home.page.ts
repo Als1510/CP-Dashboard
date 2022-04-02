@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
       async data => {
         let platformsData = await this._utilService.extractPlatforms(data, this.platform)
         this.contests = await this._utilService.convertDateinIST(platformsData)
-        this._loaderService.isLoading.next(false)
+        // this._loaderService.isLoading.next(false)
       }
     )
   }

@@ -23,7 +23,7 @@ a{
   flex-direction: column;
   
   .wrapper1{
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../../../../assets/home.jpg') center/cover no-repeat;
     display: flex;
     flex-direction: column;
@@ -113,6 +113,7 @@ a{
       text-transform: none;
       --border-radius: 12px;
       --background: #000;
+      margin: 4rem 0 6rem 0;
     }
   }
 
