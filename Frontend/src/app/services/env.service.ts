@@ -9,8 +9,6 @@ export class EnvService {
   Mongo_API_URL = 'https://competitivepdashboard.herokuapp.com/api'
   Contest_API_URL = 'https://kontests.net/api/v1/all';
   User_API_URL1 = 'https://all-cp-platform.herokuapp.com/api';
-  // codeforces spoj atcoder
   User_API_URL2 = 'https://all-cp-user-deatails.herokuapp.com/api';
-  // leetcode codeforces spoj atcoder
   constructor() { }
 }
