@@ -87,7 +87,7 @@ router.post('/', [
         res.json({ msg: "OTP has been sent to your registered mail address", name: user.name});
       },
       function (error) {
-        return res.status(400).json({ errors: [{ msg: 'Email id does not exist' }] })
+        return res.status(500).json({ errors: [{ msg: 'Email id does not exist' }] })
       }
     );
 

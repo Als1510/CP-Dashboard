@@ -89,7 +89,7 @@ router.post('/', [
         res.json({msg: "Verification link has been sent to your email account. Please activate your account", name})
       },
       function (error) {
-        return res.status(400).json({ errors: [{ msg: 'Email id does not exist' }] })
+        return res.status(400).json({ errors: [{ msg: 'Entered email address is not valid' }] })
       }
     );
 
