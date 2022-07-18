@@ -1,0 +1,102 @@
+<ion-content>
+  <div class="header">
+    <img src="../../../../../assets/Platforms/codechef.png" alt="">
+    <h1>Codechef</h1>
+  </div>
+  <div class="container" *ngIf="userData; else noData">
+    <div class="box">
+      <ion-card class="wrapper1">
+        <div class="user-img-name">
+          <img [src]="userData.user_details.image">
+          <h3>{{userData.user_details.name}}</h3>
+        </div>
+        <div class="user-details line">
+          <div class="user-details-heading">Username:</div>
+          <div class="user-details-data">
+            <p class="icon" [style.background-color]="userData.color">
+              <span>{{userData.stars}}</span>
+              <ion-icon name="star"></ion-icon>
+            </p>
+            <p class="name">
+              {{userData.user_details.username}}
+            </p>
+          </div>
+        </div>
+        <div class="user-details line">
+          <div class="user-details-heading">Country:</div>
+          <div class="user-details-data">{{userData.user_details.country}}</div>
+        </div>
+        <div class="user-details line">
+          <div class="user-details-heading">Student/Professional:</div>
+          <div class="user-details-data">{{userData.user_details.student_professional}}</div>
+        </div>
+        <div class="user-details line">
+          <div class="user-details-heading">Institution:</div>
+          <div class="user-details-data">{{userData.user_details.institution}}</div>
+        </div>
+        <div class="user-details">
+          <div class="user-details-heading">Discuss Profile:</div>
+          <div class="user-details-data">
+            <a [href]="'https://discuss.codechef.com/u/'+userData.user_details.username" target="_blank">https://discuss.codechef.com/u/{{userData.user_details.username}}</a>
+          </div>
+        </div>
+      </ion-card>
+      <ion-card class="wrapper2">
+        <h1 class="rating">
+          {{userData.rating}}
+        </h1>
+        <h4>
+          (Div {{userData.div}})
+        </h4>
+        <div class="stars">
+          <p *ngFor="let in of countStars(userData.stars)" [style.background-color]="userData.color">
+            <ion-icon name="star"></ion-icon>
+          </p>
+        </div>
+        <a class="codechef_rating" href="https://www.codechef.com/ratings">CodeChef Rating</a>
+        <p class="highest_rating">(Highest Rating {{userData.highest_rating}})</p>
+        <div class="rating_section">
+          <div class="rank_section">
+            <a href="https://www.codechef.com/ratings/all" class="rank">{{userData.global_rank}}</a>
+            <p class="rank_text">Global Rank</p>
+          </div>
+          <p class="line"></p>
+          <div class="rank_section">
+            <a href="https://www.codechef.com/ratings/all" class="rank">{{userData.country_rank}}</a>
+            <p class="rank_text">Country Rank</p>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+    <ion-card class="wrapper3">
+      <h1>Rating Graph</h1>
+      <canvas #lineCanvas></canvas>
+    </ion-card>
+    <ion-card class="wrapper4">
+      <h1>Problems Solved</h1>
+      <div class="solved" *ngIf="userData.fully_solved.count > 0">
+        <h4>Fully Solved ({{userData.fully_solved.count}})</h4>
+        <div class="problems_section" *ngFor="let problems of userData.fully_solved | keyvalue">
+          <p *ngIf="problems.value.length>0">{{problems.key}}:</p>
+          <div class="problem_tags" *ngIf="problems.value.length>0">
+            <a *ngFor="let tag of problems.value" [href]="tag.link">{{tag.name}}, </a>
+          </div>
+        </div>
+      </div>
+      <div class="solved" *ngIf="userData.partially_solved.count > 0">
+        <h4>Partially Solved ({{userData.partially_solved.count}})</h4>
+        <div class="problems_section" *ngFor="let problems of userData.partially_solved | keyvalue">
+          <p *ngIf="problems.value.length>0">{{problems.key}}:</p>
+          <div class="problem_tags" *ngIf="problems.value.length>0">
+            <a *ngFor="let tag of problems.value" [href]="tag.link">{{tag.name}}, </a>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+  <ng-template #noData>
+    <ion-card class="noData">
+      <p>No User Data</p>
+    </ion-card>
+  </ng-template>
+</ion-content>

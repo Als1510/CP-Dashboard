@@ -20,6 +20,7 @@ router.get('/details', auth, async (req, res) => {
     platformData = new Platform({
       user: req.user.id,
       platform: {
+        codechef: null,
         codeforces: null,
         spoj: null,
         leetcode: null,
@@ -49,6 +50,7 @@ router.put('/updateplatform', [auth, [
 
   try {
     let platformData = await Platform.findOne({ user: req.user.id})
+    if(platformName === "codechef") platformData.platform.codechef = username
     if(platformName === "codeforces") platformData.platform.codeforces = username
     if(platformName === "spoj") platformData.platform.spoj = username
     if(platformName === "leetcode") platformData.platform.leetcode = username

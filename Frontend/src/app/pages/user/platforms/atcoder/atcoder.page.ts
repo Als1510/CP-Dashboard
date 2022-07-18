@@ -10,8 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AtcoderPage implements OnInit {
 
-  userData1:any = null
-  userData2:any = null
+  userData:any = null
   username
   platform
   loaded = false
@@ -24,7 +23,7 @@ export class AtcoderPage implements OnInit {
 
   ngOnInit() {
     this.getData()
-    this.getUserData1()
+    this.getUserData()
   }
 
   getData() {
@@ -33,36 +32,26 @@ export class AtcoderPage implements OnInit {
     this.username = platform[Object.keys(platform)[0]]
   }
 
-  getUserData1() {
-    this._userService.getUserDetails1(this.platform, this.username).subscribe(
-      data => {
+  getUserData() {
+    this._userService.getUserDetails(this.platform, this.username).subscribe(
+      data=>{
+        this.userData = data
         if (data['status'] == "OK") {
-          this.userData1 = data
-          if(this.userData1["TopCoder ID"])
-          this.userData1["TopCoderID"] = this.userData1["TopCoder ID"]
-          if(this.userData1["Twitter ID"])
-          this.userData1["TwitterID"] = this.userData1["Twitter ID"]
-          if(this.userData1["Codeforces ID"])
-          this.userData1["CodeforcesID"] = this.userData1["Codeforces ID"]
-          if(this.userData1["Codeforces ID"])
-          this.userData1["LastCompeted"] = this.userData1["Codeforces ID"]
-          if(this.userData1["Rated Matches"])
-          this.userData1["ratedMatches"] = this.userData1["Rated Matches"]
-          if(this.userData1["Birth Year"])
-          this.userData1["BirthYear"] = this.userData1["Birth Year"]
-          if(this.userData1["Country/Region"])
-          this.userData1["CountryRegion"] = this.userData1["Country/Region"]
-        }
-        this.getUserData2()
-      }
-    )
-  }
-
-  getUserData2() {
-    this._userService.getUserDetails2(this.platform, this.username).subscribe(
-      data => {
-        if (data['status'] == "OK")  {
-          this.userData2 = data
+          this.userData = data
+          if(this.userData.other.hasOwnProperty("TopCoder ID"))
+          this.userData["TopCoderID"] = this.userData.other["TopCoder ID"]
+          if(this.userData.other.hasOwnProperty("Twitter ID"))
+          this.userData["TwitterID"] = this.userData.other["Twitter ID"]
+          if(this.userData.other.hasOwnProperty("TCodeforces ID"))
+          this.userData["CodeforcesID"] = this.userData.other["Codeforces ID"]
+          if(this.userData.other.hasOwnProperty("LastCompeted"))
+          this.userData["LastCompeted"] = this.userData.other["LastCompeted"]
+          if(this.userData.other.hasOwnProperty("Rated Matches"))
+          this.userData["ratedMatches"] = this.userData.other["Rated Matches"]
+          if(this.userData.other.hasOwnProperty("Birth Year"))
+          this.userData["BirthYear"] = this.userData.other["Birth Year"]
+          if(this.userData.other.hasOwnProperty("Country/Region"))
+          this.userData["CountryRegion"] = this.userData.other['Country/Region']
         }
         this.loaded = true
         this._loaderService.isLoading.next(false)

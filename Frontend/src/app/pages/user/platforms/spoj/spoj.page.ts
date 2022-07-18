@@ -12,8 +12,7 @@ export class SpojPage implements OnInit {
 
   username
   platform
-  userData1: any = null
-  userData2: any = null
+  userData:any = null
   loaded = false
 
   constructor(
@@ -24,7 +23,7 @@ export class SpojPage implements OnInit {
 
   ngOnInit() {
     this.getData()
-    this.getUserData1()
+    this.getUserData()
   }
   
   getData() {
@@ -33,25 +32,11 @@ export class SpojPage implements OnInit {
     this.username = platform[Object.keys(platform)[0]]
   }
   
-  getUserData1() {
-    this._userService.getUserDetails1(this.platform, this.username).subscribe(data=> {
-      if(data["status"]=="OK") {
-        this.userData1 = data
-        this.userData1["problems_solved"] = this.userData1["Problems solved"]
-        this.userData1["solution_submitted"] = this.userData1["Solutions submitted"]
-        this.getUserData2()
-      }
-    })
-  }
-
-  getUserData2() {
-    this._userService.getUserDetails2(this.platform, this.username).subscribe(data=> {
-      if(data["status"]=="OK") { 
-        this.userData2 = data
-        this.loaded = true
-      }
+  getUserData(){
+    this._userService.getUserDetails(this.platform, this.username).subscribe(data=> {
+      this.userData = data
+      this.loaded = true
       this._loaderService.isLoading.next(false)
     })
   }
-
 }

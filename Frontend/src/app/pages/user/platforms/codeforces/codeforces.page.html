@@ -3,33 +3,33 @@
     <img src="../../../../../assets/Platforms/codeforces.png" alt="">
     <h1>Codeforces</h1>
   </div>
-  <div class="container" *ngIf="userData1; else noData">
+  <div class="container" *ngIf="userData; else noData">
     <div class="box">
-      <ion-card class="wrapper1" *ngIf="loaded1">
+      <ion-card class="wrapper1" *ngIf="loaded">
         <div class="user-image">
-          <img [src]="userData1.avatar" alt="">
+          <img [src]="userData.avatar" alt="">
         </div>
         <div class="user-details">
-          <p id="rank">{{userData1.rank}}</p>
-          <p id="username">{{userData1.handle}}</p>
+          <p id="rank">{{userData.rank}}</p>
+          <p id="username">{{userData.handle}}</p>
           <div class="name-city">
-            <p id="name">{{userData1.firstName}} {{userData1.lastName}}</p>
-            <p id="address">{{userData1.city}}, {{userData1.country}}</p>
+            <p id="name">{{userData.firstName}} {{userData.lastName}}</p>
+            <p id="address">{{userData.city}}, {{userData.country}}</p>
           </div>
           <div class="contest-rating-max-rating">
             <div class="contest-rating">
               <img src="../../../../../assets/Utils/codefoces_contest_rating.png" alt="">
-              <p><span class="p-main">Contest rating:</span> {{userData1.rating}}</p>
+              <p><span class="p-main">Contest rating:</span> {{userData.rating}}</p>
             </div>
-            <p id="max-rating">(<span class="p-main">max.</span> {{userData1.maxRank}}, {{userData1.maxRating}})</p>
+            <p id="max-rating">(<span class="p-main">max.</span> {{userData.maxRank}}, {{userData.maxRating}})</p>
           </div>
           <div class="contribution">
             <img src="../../../../../assets/Utils/codefoces_contributions.png" alt="">
-            <p><span class="p-main">Contribution:</span> {{userData1.contribution}}</p>
+            <p><span class="p-main">Contribution:</span> {{userData.contribution}}</p>
           </div>
           <div class="friends">
             <img src="../../../../../assets/Utils/codefoces_friends_of.png" alt="">
-            <p><span class="p-main">Friend of:</span> {{userData1.friendOfCount}} users</p>
+            <p><span class="p-main">Friend of:</span> {{userData.friendOfCount}} users</p>
           </div>
         </div>
       </ion-card>
@@ -38,7 +38,7 @@
         <canvas #lineCanvas></canvas>
       </ion-card>
     </div>
-    <ion-card class="wrapper3" *ngIf="userData2.length > 0">
+    <ion-card class="wrapper3" *ngIf="userData.contests.length > 0">
       <ion-list class="contest_heading_header">
         <ion-label class="contest_heading_label">
           Contest Name
@@ -56,7 +56,7 @@
           Solved
         </ion-label>
       </ion-list>
-      <ion-list *ngFor="let contest of userData2">
+      <ion-list *ngFor="let contest of userData.contests">
         <ion-label>
           {{contest.contest}}
         </ion-label>

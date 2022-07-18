@@ -3,50 +3,50 @@
     <img src="../../../../../assets/Platforms/atcoder.png" alt="">
     <h1>Atcoder</h1>
   </div>
-  <div class="container" *ngIf="userData1; else noData">
+  <div class="container" *ngIf="userData; else noData">
     <ion-card class="wrapper" *ngIf="loaded">
       <div class="box">
         <h2>User Profile</h2>
         <div class="user_details">
-        <p class="username">{{userData2.username}}</p>
-        <div class="level" *ngIf="userData2.level!=NA">
+        <p class="username">{{username}}</p>
+        <div class="level" *ngIf="userData.level">
           <ion-icon name="people-outline"></ion-icon>
-          Level: {{userData2.level}}
+          Level: {{userData.level}}
         </div>
-        <div class="rank" *ngIf="userData1.rank || userData2.rank">
+        <div class="rank" *ngIf="userData.rank">
           <ion-icon name="trophy-outline"></ion-icon>
-          Rank: {{userData2.rank ? userData2.rank : userData1.Rank}}
+          Rank: {{userData.rank}}
         </div>
-        <p class="data" *ngIf="userData1.Rating || userData2.rating">Rating: <span>{{userData1.Rating ? userData1.Rating : userData2.rating}}</span></p>
-        <p class="data">Highest Rating: <span>{{userData2.highest}}</span></p>
+        <p class="data" *ngIf="userData.Rating">Rating: <span>{{userData.Rating}}</span></p>
+        <p class="data">Highest Rating: <span>{{userData.highest}}</span></p>
         <div class="country">
           <ion-icon name="globe-outline"></ion-icon>
-          Country/Region: <span>{{userData1.CountryRegion}}</span>
+          Country/Region: <span>{{userData.CountryRegion}}</span>
         </div>
-        <p class="data">Birth Year: <span>{{userData1.BirthYear}}</span></p>
-        <div class="last_compete" *ngIf="userData1.LastCompeted">
+        <p class="data">Birth Year: <span>{{userData.BirthYear}}</span></p>
+        <div class="last_compete" *ngIf="userData.LastCompeted">
           <ion-icon name="save-outline"></ion-icon>
           Last Compete: <span>{{userData1.LastCompeted}}</span>
         </div>
-        <div class="rated_matches" *ngIf="userData1.ratedMatches">
+        <div class="rated_matches" *ngIf="userData.ratedMatches">
           <ion-icon name="people-outline"></ion-icon>
-          Rated Matches: <span>{{userData1.ratedMatches}}</span>
+          Rated Matches: <span>{{userData.ratedMatches}}</span>
         </div>
-        <div class="affiliation" *ngIf="userData1.Affiliation">
+        <div class="affiliation" *ngIf="userData.Affiliation">
           <ion-icon name="business-outline"></ion-icon>
-          Affiliation: <span>{{userData1.Affiliation}}</span>
+          Affiliation: <span>{{userData.Affiliation}}</span>
         </div>
-        <div class="twitter" *ngIf="userData1.TwitterID">
+        <div class="twitter" *ngIf="userData.TwitterID">
           <ion-icon name="logo-twitter"></ion-icon>
-          Twitter ID: <span>{{userData1.TwitterID}}</span>
+          Twitter ID: <span>{{userData.TwitterID}}</span>
         </div>
-        <div class="topcoder" *ngIf="userData1.TopCoderID">
+        <div class="topcoder" *ngIf="userData.TopCoderID">
           <img src="../../../../../assets/Platforms/topcoder.png" alt="">
-          Topcoder ID: <span>{{userData1.TopCoderID}}</span>
+          Topcoder ID: <span>{{userData.TopCoderID}}</span>
         </div>
-        <div class="codeforces" *ngIf="userData1.CodeforcesID">
+        <div class="codeforces" *ngIf="userData.CodeforcesID">
           <img src="../../../../../assets/Platforms/codeforces.png" alt="">
-          Codeforces ID: <span>@{{userData1.CodeforcesID}}</span>
+          Codeforces ID: <span>@{{userData.CodeforcesID}}</span>
         </div>
       </div>
       </div>

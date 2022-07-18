@@ -5,28 +5,28 @@
   </div>
   <div class="container" *ngIf="loaded; else noData">
     <ion-card class="wrapper1">
-      <img [src]="userData1.img_src" alt="">
+      <img [src]="userData.img_src" alt="">
       <div class="user-details">
-        <p class="fullname">{{userData1.full_name}}</p>
+        <p class="fullname">{{userData.fullname}}</p>
         <div class="username">
           <ion-icon name="at-outline"></ion-icon>
-          <p>{{userData2.username}}</p>
+          <p>{{userData.username}}</p>
         </div>
         <div class="location">
           <ion-icon name="location-outline"></ion-icon>
-          <p>{{userData1.location}}</p>
+          <p>{{userData.location}}</p>
         </div>
         <div class="joined">
           <ion-icon name="time-outline"></ion-icon>
-          <p>Joined {{userData2.join_date}}</p>
+          <p>Joined {{userData.join_date}}</p>
         </div>
         <div class="rank">
           <ion-icon name="trophy-outline"></ion-icon>
-          <p>World Rank: #{{userData2.rank}} ({{userData2.points}} points)</p>
+          <p>World Rank: #{{userData.rank}} ({{userData.points}} points)</p>
         </div>
         <div class="institute">
           <ion-icon name="business-outline"></ion-icon>
-          <p>Insitution: {{userData2.institute}}</p>
+          <p>Insitution: {{userData.institute}}</p>
         </div>
       </div>
     </ion-card>
@@ -36,12 +36,12 @@
         <div class="solved">
           <ion-icon name="checkmark-outline"></ion-icon>
           <p class="header">Problem solved</p>
-          <p class="count">{{userData1.problems_solved}}</p>
+          <p class="count">{{userData.problems_solved}}</p>
         </div>
         <div class="submitted">
           <ion-icon name="navigate-outline"></ion-icon>
           <p class="header">Solutions submitted</p>
-          <p class="count">{{userData1.solution_submitted}}</p>
+          <p class="count">{{userData.solution_submitted}}</p>
         </div>
       </div>
     </ion-card>
@@ -49,7 +49,7 @@
       <h2>Problems</h2>
       <h4>List of solved classical problems:</h4>
       <div class="data">
-        <ion-label *ngFor="let solve of userData2.solved">
+        <ion-label *ngFor="let solve of userData.solved">
           {{solve}}
         </ion-label>
       </div>
@@ -57,7 +57,7 @@
     <ion-card class="wrapper4">
       <h4>TODO list of classical problems:</h4>
       <div class="data">
-        <ion-label *ngFor="let todos of userData2.todo">
+        <ion-label *ngFor="let todos of userData.todo">
           {{todos}}
         </ion-label>
       </div>

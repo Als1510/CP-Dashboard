@@ -9,6 +9,10 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: PlatformsPage },
       {
+        path: 'codechef',
+        loadChildren: () => import('./codechef/codechef.module').then( m => m.CodechefPageModule)
+      },
+      {
         path: 'codeforces',
         loadChildren: () => import('./codeforces/codeforces.module').then( m => m.CodeforcesPageModule),
         canActivate: [PlatformGuard]
@@ -30,6 +34,7 @@ const routes: Routes = [
       },
     ]
   },
+
 ];
 
 @NgModule({

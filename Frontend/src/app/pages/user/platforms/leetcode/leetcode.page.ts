@@ -35,7 +35,7 @@ export class LeetcodePage implements OnInit {
     this.getData()
     this._loaderService.isLoading.next(true)
     this.userData1 = await this._userService.getLeetCodeRecentSubmission(this.username)
-    this.getUserData1();
+    this.getUserData();
     this.getUserData2();
   }
 
@@ -45,8 +45,8 @@ export class LeetcodePage implements OnInit {
     this.username = platform[Object.keys(platform)[0]]
   }
 
-  getUserData1() {
-    this._userService.getUserDetails2(this.platform, this.username).subscribe(
+  getUserData() {
+    this._userService.getUserDetails(this.platform, this.username).subscribe(
       data => {
         if(data['status'] == 'OK') {
           this.userData = data

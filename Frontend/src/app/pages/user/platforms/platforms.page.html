@@ -2,6 +2,14 @@
   <h1>Platforms</h1>
   <div class="wrapper" id="wrapper">
     <ion-card *ngIf="platforms.codeforces">
+      <img src="../../../../assets/Platforms/codechef.png" alt="">
+      <div class="platform_details">
+        <h2>Codechef</h2>
+        <p class="user">{{platforms.codechef}}</p>
+        <ion-button (click)="navigateTo('codechef')">Show Profile<ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
+    </ion-card>
+    <ion-card *ngIf="platforms.codeforces">
       <img src="../../../../assets/Platforms/codeforces.png" alt="">
       <div class="platform_details">
         <h2>Codeforces</h2>
