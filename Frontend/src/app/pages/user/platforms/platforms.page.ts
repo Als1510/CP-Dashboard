@@ -62,6 +62,7 @@ export class PlatformsPage implements OnInit {
   getplatform() {
     this._userSerive.getPlatforms().subscribe(
       async data => {
+        console.log(data)
       this.platforms = await data['platformData'].platform
       this._loaderService.isLoading.next(false)
       this.getUserPlatformData()
