@@ -51,15 +51,17 @@ export class CodechefPage implements OnInit {
   getUserData() {
     this._userService.getUserDetails(this.platform, this.username).subscribe(
       data => {
-        this.userData = data
-        this.CalStars()
-        this.userData.user_details['student_professional'] = this.userData.user_details['student/professional']
-        this.contestArray = this.userData.contest_ratings.map(res => res.name)
-        this.ratingArray = this.userData.contest_ratings.map(res => res.rating)
-        setTimeout(()=>{
-          this.lineChartMethod()
-          this._loderService.isLoading.next(false)
-        }, 1)
+        if (data['status'] == "OK") {
+          this.userData = data
+          this.CalStars()
+          this.userData.user_details['student_professional'] = this.userData.user_details['student/professional']
+          this.contestArray = this.userData.contest_ratings.map(res => res.name)
+          this.ratingArray = this.userData.contest_ratings.map(res => res.rating)
+          setTimeout(()=>{
+            this.lineChartMethod()
+            this._loderService.isLoading.next(false)
+          }, 1)
+        }
       }
     )
   }
