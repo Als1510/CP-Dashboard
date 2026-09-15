@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { SharedModule } from '../../utils/shared.module';
-import { SocialComponent } from '../social/social.component';
 import { RegisterPage } from './register.page';
 
 @NgModule({
@@ -19,6 +18,6 @@ import { RegisterPage } from './register.page';
     RegisterPageRoutingModule,
     SharedModule
   ],
-  declarations: [RegisterPage, SocialComponent]
+  declarations: [RegisterPage]
 })
 export class RegisterPageModule { }
