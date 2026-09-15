@@ -1,8 +1,8 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { LoaderService } from './loader.service';
 import { LocalStorageService } from './localStorage.service';
@@ -12,7 +12,7 @@ const TOKEN_HEADER_KEY = 'x-token';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpinterceptorService {
+export class HttpinterceptorService implements HttpInterceptor {
 
   token = '';
 
@@ -36,8 +36,8 @@ export class HttpinterceptorService {
     })
 
     return next.handle(req).pipe(
+      finalize(() => this._loaderService.isLoading.next(false)),
       catchError((error) => {
-        this._loaderService.isLoading.next(false);
         if (error instanceof HttpErrorResponse) {
           const errorBody = error.error;
           const serverMsg = errorBody && (errorBody.details || errorBody.msg || errorBody.message);

@@ -105,7 +105,8 @@ export class DashboardPage implements OnInit, OnDestroy {
   getPlatforms() {
     this._userService.getPlatforms().subscribe(
       data => {
-        const platformData = data.platformData.platform
+        const platformData = data?.platformData?.platform
+        if (!platformData) return;
         for (const prop of Object.keys(platformData)) {
           if (platformData[prop as keyof typeof platformData])
             this.registeredPlatform++
@@ -119,9 +120,13 @@ export class DashboardPage implements OnInit, OnDestroy {
     return new Promise((resolve) => {
       this._contestService.getAllUpcomingOngoingContest().subscribe(
         data => {
-          this.contestsData = data;
+          this.contestsData = data || [];
           this.contestPlatforms = [...new Set(this.contestsData.map(contest => contest.platform))];
           this.filterContestsByPlatform();
+          this._loaderService.isLoading.next(false);
+          resolve();
+        },
+        () => {
           this._loaderService.isLoading.next(false);
           resolve();
         }
