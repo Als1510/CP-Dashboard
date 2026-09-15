@@ -38,9 +38,10 @@ ion-content {
         background-color: var(--img-background);
         padding: 0.5rem;
         border-radius: 12px;
+        margin-top: 20px;
       }
 
-            .badge-top {
+      .badge-top {
         position: absolute;
         top: 0.5rem;
         left: 0.75rem;
@@ -56,7 +57,7 @@ ion-content {
         z-index: 2;
       }
 
-            .platform_details {
+      .platform_details {
         flex: 1;
         min-width: 0;
         display: flex;
@@ -219,6 +220,24 @@ ion-content {
 
       ion-card {
         padding: 0.9rem 1rem !important;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        .platform_details {
+          flex: 1 1 calc(100% - 80px);
+          padding-bottom: 0;
+
+          .last-fetched {
+            word-break: break-word;
+          }
+        }
+
+        .card-actions {
+          position: static;
+          width: 100%;
+          justify-content: flex-end;
+          margin-top: 0.6rem;
+        }
       }
     }
 
