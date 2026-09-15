@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 connectDB()
-cron.schedule('0 * * * *', scrapeContests);
+cron.schedule('0 0,12 * * *', scrapeContests, { timezone: 'UTC' }); // runs twice daily: 12 AM and 12 PM UTC
 app.use(express.static('config'))
 
 app.use(express.json({ extended: false }))
@@ -40,6 +40,10 @@ app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/platform', require('./routes/api/platform'))
 app.use('/api/social', require('./routes/api/social'))
 app.use('/api/contest', require('./routes/api/contest'))
+app.use('/api/codechef', require('./routes/api/codechef'))
+app.use('/api/codeforces', require('./routes/api/codeforces'))
+app.use('/api/atcoder', require('./routes/api/atcoder'))
+app.use('/api/leetcode', require('./routes/api/leetcode'))
 
 const PORT = process.env.PORT;
 

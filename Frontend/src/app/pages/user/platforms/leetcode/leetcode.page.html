@@ -2,39 +2,40 @@
   <div class="header">
     <img src="../../../../../assets/Platforms/leetcode.png" alt="">
     <h1>Leetcode</h1>
+    <ion-button class="refresh-btn" *ngIf="userData" [disabled]="isRefreshing" (click)="refreshUserData()">
+      <ion-icon name="refresh-outline" *ngIf="!isRefreshing"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="isRefreshing"></ion-spinner>
+    </ion-button>
   </div>
   <div class="container" *ngIf="userData; else noData">
     <div class="box">
       <div class="wrapper1">
         <ion-card class="profile">
-          <img [src]="userData1 ? userData1.matchedUser.profile.userAvatar : '../../../../../assets/Utils/leetcode_avatar.jpg'" alt="">
+          <img [src]="userData?.matchedUser?.profile?.userAvatar || '../../../../../assets/Utils/leetcode_avatar.jpg'" alt="">
           <div class="user">
             <p class="username">{{username}}</p>
-            <p class="rank">Rank<span class="no"> {{userData1 ? userData1.matchedUser.profile.ranking : userData.ranking}}</span></p>
+            <p class="rank">Rank<span class="no"> {{userData?.matchedUser?.profile?.ranking}}</span></p>
           </div>
         </ion-card>
         <div class="problems">
           <ion-card class="easy">
             <h2>Easy</h2>
             <div class="score">
-              <p><span class="no">{{userData.easy_questions_solved}}</span>  / {{userData.total_easy_questions}}</p>
-              <p class="beats">Beats: <span>{{userData.easy_acceptance_rate}}</span></p>
+              <p><span class="no">{{easySolved}}</span>  / {{easyTotal}}</p>
             </div>
             <ion-progress-bar [value]="easyRate"></ion-progress-bar>
           </ion-card>
           <ion-card class="medium">
             <h2>Medium</h2>
             <div class="score">
-              <p><span class="no">{{userData.medium_questions_solved}}</span>  / {{userData.total_medium_questions}}</p>
-              <p class="beats">Beats: <span>{{userData.medium_acceptance_rate}}</span></p>
+              <p><span class="no">{{mediumSolved}}</span>  / {{mediumTotal}}</p>
             </div>
             <ion-progress-bar [value]="mediumRate"></ion-progress-bar>
           </ion-card>
           <ion-card class="hard">
             <h2>Hard</h2>
             <div class="score">
-              <p> <span class="no">{{userData.hard_questions_solved}}</span> / {{userData.total_hard_questions}}</p>
-              <p class="beats">Beats: <span>{{userData.hard_acceptance_rate}}</span></p>
+              <p> <span class="no">{{hardSolved}}</span> / {{hardTotal}}</p>
             </div>
             <ion-progress-bar [value]="hardRate"></ion-progress-bar>
           </ion-card>

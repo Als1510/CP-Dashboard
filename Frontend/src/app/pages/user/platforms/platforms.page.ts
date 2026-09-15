@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { UserService } from 'src/app/services/user.service';
+import { PlatformData } from 'src/app/models/platform.model';
 
 @Component({
   selector: 'app-platforms',
@@ -13,10 +14,19 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class PlatformsPage implements OnInit {
-  platforms = new Array();
-  userPlatformData = new Array();
+  @ViewChild('modal', { read: ElementRef }) modal: ElementRef<HTMLElement>;
+
+  platforms: PlatformData = {
+    codechef: null,
+    codeforces: null,
+    leetcode: null,
+    atcoder: null
+  };
   platformForm: FormGroup
   platformEntry = false
+  platformEntries: { key: string; value: string | null }[] = []
+  lastFetched: { [key: string]: string } = {}
+  platformStatus: { [key: string]: string } = {}
 
   constructor(
     private _userSerive: UserService,
@@ -37,18 +47,26 @@ export class PlatformsPage implements OnInit {
     this.hideCard()
   }
 
-  showCard(data) {
+  showCard(data: { key: string; value: string | null }) {
     this.platformForm.controls['platformName'].setValue(data.key)
     this.platformForm.controls['username'].setValue(data.value)
-    let card = document.getElementById('modal')
-    card.style.display = 'block';
+    const modalElement = this.modal?.nativeElement
+    if (modalElement) {
+      modalElement.style.display = 'block';
+    }
   }
 
   hideCard() {
     this.platformForm.controls['platformName'].setValue(null)
     this.platformForm.controls['username'].setValue(null)
-    let card = document.getElementById('modal')
-    card.style.display = 'none';
+    const modalElement = this.modal?.nativeElement
+    if (modalElement) {
+      modalElement.style.display = 'none';
+    }
+  }
+
+  editPlatform(platform: keyof PlatformData) {
+    this.showCard({ key: platform, value: this.platforms[platform] })
   }
 
   navigateTo(data) {
@@ -59,10 +77,32 @@ export class PlatformsPage implements OnInit {
     this._router.navigate([data], { relativeTo: this._route })
   }
 
+  formatLastFetched(dateVal: any): string {
+    if (!dateVal) return 'Never';
+    const d = new Date(dateVal);
+    if (isNaN(d.getTime())) return 'Never';
+    return d.toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
+  }
+
   getplatform() {
     this._userSerive.getPlatforms().subscribe(
       async data => {
-        this.platforms = await data['platformData'].platform
+        // Use profileData array when backend provides it; fall back to platform usernames
+        const profileArray = data.profileData || [];
+        if (profileArray.length > 0) {
+          profileArray.forEach((item: any) => {
+            if (item && item.platform && item.username) {
+              this.platforms[item.platform] = item.username;
+              this.lastFetched[item.platform] = item.last_fetched ? this.formatLastFetched(item.last_fetched) : 'Never';
+              this.platformStatus[item.platform] = item.status === 'live' ? 'Healthy' : 'Temporarily unavailable';
+            }
+          });
+        } else {
+          this.platforms = data.platformData.platform;
+        }
+        this.platformEntries = Object.keys(this.platforms || {})
+          .filter(key => (this.platforms || {})[key])
+          .map(key => ({ key, value: (this.platforms || {})[key] }))
         this._loaderService.isLoading.next(false)
         this.getUserPlatformData()
       })

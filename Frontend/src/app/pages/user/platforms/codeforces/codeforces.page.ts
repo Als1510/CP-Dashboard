@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { LoaderService } from 'src/app/services/loader.service';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-codeforces',
@@ -20,14 +21,18 @@ export class CodeforcesPage implements OnInit, OnDestroy {
   ratingArray = []
   contestArray = []
   loaded = false
+  isRefreshing = false
   theme;
+
+  @ViewChild('lineCanvas') lineCanvas: ElementRef<HTMLCanvasElement>;
 
   constructor(
     private _userService: UserService,
     private _localStorageService: LocalStorageService,
     private _loaderService: LoaderService,
     private _utilService: UtilService,
-    private _themeService: ThemeService
+    private _themeService: ThemeService,
+    private _alertService: AlertService
   ) {
     Chart.register(...registerables)
   }
@@ -41,6 +46,7 @@ export class CodeforcesPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.lineChart?.destroy();
     this._loaderService.isLoading.next(false);
   }
 
@@ -52,24 +58,66 @@ export class CodeforcesPage implements OnInit, OnDestroy {
 
   getUserData() {
     this.userData = null;
-    this._userService.getUserDetails(this.platform, this.username).subscribe(
-      data => {
-        if (data['status'] == "OK") {
-          this.userData = data
-          this.ratingArray = this.userData.contests.map(res => res.newRating).reverse()
-          this.contestArray = this.userData.contests.map(res => res.contest).reverse()
-          setTimeout(() => {
-            this.lineChartMethod()
-            this._loaderService.isLoading.next(false)
-          }, 1)
+    this._userService.getUserDetails(this.platform, this.username).subscribe({
+      next: (data) => {
+        this.applyUserData(data)
+        this._loaderService.isLoading.next(false)
+      },
+      error: (err) => {
+        this.showError(err || { details: 'Failed to load profile.' })
+        this._loaderService.isLoading.next(false)
+      }
+    })
+  }
+
+  refreshUserData(refresher?: HTMLIonRefresherElement) {
+    if (this.isRefreshing) {
+      return
+    }
+    this.isRefreshing = true
+    this._loaderService.isLoading.next(true)
+    this._userService.refreshUserDetails(this.platform, this.username).subscribe({
+      next: (data) => {
+        if (data && data['status'] === 'OK') {
+          this.applyUserData(data)
+        } else {
+          this.showError(data)
+        }
+      },
+      error: (err) => {
+        this.showError(err || { details: 'Refresh failed. Existing data preserved.' })
+      },
+      complete: () => {
+        this.isRefreshing = false
+        this._loaderService.isLoading.next(false)
+        if (refresher) {
+          refresher.complete()
         }
       }
-    )
+    })
+  }
+
+  applyUserData(data: any) {
+    if (data && data['status'] == "OK") {
+      this.userData = data
+      this.ratingArray = (this.userData.contest_ratings || []).map(res => res.rating).reverse()
+      this.contestArray = (this.userData.contest_ratings || []).map(res => res.name).reverse()
+      setTimeout(() => {
+        this.lineChartMethod()
+      }, 1)
+    } else if (data) {
+      this.showError(data)
+    }
+  }
+
+  showError(data: any) {
+    const message = (data && data['details']) || 'Could not fetch profile. Please try again later.'
+    this._alertService.presentToast(message, 'danger')
   }
 
   lineChartMethod() {
-    let lineCanvas = document.querySelector('canvas')
-    this.lineChart = new Chart(lineCanvas, {
+    this.lineChart?.destroy();
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: "line",
       data: {
         labels: this.contestArray,

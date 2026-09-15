@@ -15,7 +15,7 @@ ion-content {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 1rem 0 0 1.3rem;
+    margin: 1rem 0.4rem 0 0.4rem;
 
     img {
       height: 50px;
@@ -28,6 +28,26 @@ ion-content {
       margin: 0 0 0 1rem;
       font-size: 2rem;
       color: var(--text-color-1);
+    }
+
+    .refresh-btn {
+      margin: 0 0 0 auto;
+      text-transform: none;
+      --background: var(--button-background);
+      --color: var(--button-text-color);
+      color: var(--button-text-color);
+      --padding-start: 0.75rem;
+      --padding-end: 0.75rem;
+
+      ion-icon,
+      ion-spinner {
+        --color: var(--button-text-color);
+        color: var(--button-text-color);
+        font-size: 1.35rem;
+        font-weight: 700;
+        --ionicon-stroke-width: 64px;
+        margin: 0;
+      }
     }
   }
 
@@ -194,7 +214,7 @@ ion-content {
 
         .submission_header {
           font-size: 1rem;
-          color: #000;
+          color: var(--text-color-1);
         }
 
         ion-label {

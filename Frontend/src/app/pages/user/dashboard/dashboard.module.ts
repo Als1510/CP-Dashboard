@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
-import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component';
 import { SharedModule } from '../../utils/shared.module';
 import { DashboardPage } from './dashboard.page';
 
@@ -18,8 +17,6 @@ import { DashboardPage } from './dashboard.page';
     DashboardPageRoutingModule,
     SharedModule
   ],
-  declarations: [DashboardPage,
-    MenubuttonComponent
-  ]
+  declarations: [DashboardPage]
 })
 export class DashboardPageModule { }

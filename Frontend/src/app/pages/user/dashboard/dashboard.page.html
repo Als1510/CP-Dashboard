@@ -3,10 +3,10 @@
     <h1>Dashboard</h1>
     <div class="profile" (click)="showUser()">
       <div class="profile_details">
-        <ion-icon name="person-circle-outline" id="user"></ion-icon>
-        <p class="username" id="username">{{username}}</p>
+        <ion-icon name="person-circle-outline" #userIcon></ion-icon>
+        <p class="username" #usernameElement>{{username}}</p>
       </div>
-      <p class="name" id="name">{{name}}</p>
+      <p class="name" #nameElement>{{name}}</p>
     </div>
   </div>
   <div class="wrapper1">
@@ -14,7 +14,7 @@
       <ion-card-content>
         <p class="wrapper1_content">Registered Platforms</p>
       </ion-card-content>
-      <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" [style.--value]="value"
+      <div role="progressbar" [attr.aria-valuenow]="value" aria-valuemin="0" aria-valuemax="100" [style.--value]="value"
         [style.--registeredPlatform]="registeredPlatform"></div>
     </ion-card>
     <ion-card class="card2 card">
@@ -50,10 +50,6 @@
           <img src="../../../../assets/Platforms/leetcode.png" alt="">
           <h3>Leetcode</h3>
         </ion-slide>
-        <ion-slide>
-          <img src="../../../../assets/Platforms/spoj.png" alt="">
-          <h3>SPOJ</h3>
-        </ion-slide>
       </ion-slides>
     </ion-card>
   </div>
@@ -62,7 +58,7 @@
       <div class="contest_header">
         <ion-label class="heading">Upcoming Contests</ion-label>
         <div class="search_by">
-          <ion-select (ionChange)="platformChange($event.target.value)" cancelText="Cancel" okText="Okay"
+          <ion-select (ionChange)="platformChange($event.detail.value)" cancelText="Cancel" okText="Okay"
             placeholder="Platform" [multiple]="true">
             <ion-select-option *ngFor="let platform of contestPlatforms" [value]="platform">{{platform |
               uppercase}}</ion-select-option>
@@ -87,7 +83,7 @@
             Duration
           </ion-label>
         </ion-list>
-        <ion-list *ngFor="let contest of contests" class="contest_data">
+        <ion-list *ngFor="let contest of paginatedContests" class="contest_data">
           <ion-label>
             <a [href]="contest.url" target="_blank">
               {{contest.name}}
@@ -107,6 +103,11 @@
           </ion-label>
         </ion-list>
       </ion-card-content>
+      <div class="pagination-controls" *ngIf="contests.length > pageSize" style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem;">
+        <ion-button fill="clear" size="small" (click)="prevPage()" [disabled]="currentPage === 1">Previous</ion-button>
+        <span>Page {{currentPage}} / {{totalPages}}</span>
+        <ion-button fill="clear" size="small" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</ion-button>
+      </div>
       <ng-template #nodata>
         <span class="no_data">No Contest</span>
       </ng-template>

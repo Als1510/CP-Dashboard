@@ -2,34 +2,30 @@
   <div class="header">
     <img src="../../../../../assets/Platforms/codeforces.png" alt="">
     <h1>Codeforces</h1>
+    <ion-button class="refresh-btn" *ngIf="userData" [disabled]="isRefreshing" (click)="refreshUserData()">
+      <ion-icon name="refresh-outline" *ngIf="!isRefreshing"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="isRefreshing"></ion-spinner>
+    </ion-button>
   </div>
   <div class="container" *ngIf="userData; else noData">
     <div class="box">
       <ion-card class="wrapper1" *ngIf="loaded">
         <div class="user-image">
-          <img [src]="userData.avatar" alt="">
+          <img [src]="userData.user_details.image" alt="">
         </div>
         <div class="user-details">
           <p id="rank">{{userData.rank}}</p>
-          <p id="username">{{userData.handle}}</p>
+          <p id="username">{{userData.user_details.username}}</p>
           <div class="name-city">
-            <p id="name">{{userData.firstName}} {{userData.lastName}}</p>
-            <p id="address">{{userData.city}}, {{userData.country}}</p>
+            <p id="name">{{userData.user_details.name}}</p>
+            <p id="address">{{userData.user_details.country}}</p>
           </div>
           <div class="contest-rating-max-rating">
             <div class="contest-rating">
               <img src="../../../../../assets/Utils/codefoces_contest_rating.png" alt="">
               <p><span class="p-main">Contest rating:</span> {{userData.rating}}</p>
             </div>
-            <p id="max-rating">(<span class="p-main">max.</span> {{userData.maxRank}}, {{userData.maxRating}})</p>
-          </div>
-          <div class="contribution">
-            <img src="../../../../../assets/Utils/codefoces_contributions.png" alt="">
-            <p><span class="p-main">Contribution:</span> {{userData.contribution}}</p>
-          </div>
-          <div class="friends">
-            <img src="../../../../../assets/Utils/codefoces_friends_of.png" alt="">
-            <p><span class="p-main">Friend of:</span> {{userData.friendOfCount}} users</p>
+            <p id="max-rating">(<span class="p-main">max.</span> {{userData.maxRating}}, {{userData.maxRank}})</p>
           </div>
         </div>
       </ion-card>
@@ -38,7 +34,7 @@
         <canvas #lineCanvas></canvas>
       </ion-card>
     </div>
-    <ion-card class="wrapper3" *ngIf="userData.contests.length > 0">
+    <ion-card class="wrapper3" *ngIf="userData.contest_ratings.length > 0">
       <ion-list class="contest_heading_header">
         <ion-label class="contest_heading_label">
           Contest Name
@@ -50,27 +46,21 @@
           New Rating
         </ion-label>
         <ion-label class="contest_heading_label duration mobile">
-          Ranting Change
-        </ion-label>
-        <ion-label class="contest_heading_label duration">
-          Solved
+          Rating Change
         </ion-label>
       </ion-list>
-      <ion-list *ngFor="let contest of userData.contests" class="contest_data">
+      <ion-list *ngFor="let contest of userData.contest_ratings" class="contest_data">
         <ion-label>
-          {{contest.contest}}
+          {{contest.name}}
         </ion-label>
         <ion-label>
           {{contest.rank}}
         </ion-label>
         <ion-label class="mobile">
-          {{contest.newRating}}
+          {{contest.rating}}
         </ion-label>
         <ion-label class="mobile">
-          {{contest.ratingChange}}
-        </ion-label>
-        <ion-label>
-          {{contest.solved}}
+          {{contest.rating - contest.oldRating}}
         </ion-label>
       </ion-list>
     </ion-card>

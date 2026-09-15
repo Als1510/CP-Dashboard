@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { PlatformsPageRoutingModule } from './platforms-routing.module';
 
-import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component';
 import { SharedModule } from '../../utils/shared.module';
 import { PlatformsPage } from './platforms.page';
 
@@ -19,6 +18,6 @@ import { PlatformsPage } from './platforms.page';
     PlatformsPageRoutingModule,
     SharedModule
   ],
-  declarations: [PlatformsPage, MenubuttonComponent],
+  declarations: [PlatformsPage]
 })
 export class PlatformsPageModule { }

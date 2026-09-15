@@ -10,16 +10,12 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', component: PlatformsPage },
       {
         path: 'codechef',
-        loadChildren: () => import('./codechef/codechef.module').then( m => m.CodechefPageModule)
+        loadChildren: () => import('./codechef/codechef.module').then( m => m.CodechefPageModule),
+        canActivate: [PlatformGuard]
       },
       {
         path: 'codeforces',
         loadChildren: () => import('./codeforces/codeforces.module').then( m => m.CodeforcesPageModule),
-        canActivate: [PlatformGuard]
-      },
-      {
-        path: 'spoj',
-        loadChildren: () => import('./spoj/spoj.module').then( m => m.SpojPageModule),
         canActivate: [PlatformGuard]
       },
       {

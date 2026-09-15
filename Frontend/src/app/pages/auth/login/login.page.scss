@@ -59,7 +59,7 @@
       flex-direction: column;
 
       ion-item {
-        border-bottom: 0.1px solid #333;
+        border-bottom: 0.1px solid var(--line-color);
         margin: 0.5rem 0;
 
         .eye_icon {
@@ -85,8 +85,8 @@
         --border-radius: 15px !important;
         font-size: 14px;
         font-weight: 300px;
-        --background: #000;
-        color: #fff;
+        --background: var(--button-background);
+        color: var(--button-text-color);
       }
 
       .submit {

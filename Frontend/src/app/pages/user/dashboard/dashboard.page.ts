@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { ContestService } from 'src/app/services/contest.service';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -6,6 +6,7 @@ import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
+import { Contest } from 'src/app/models/contest.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,11 +15,16 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class DashboardPage implements OnInit, OnDestroy {
 
-  contestsData: any = [];
-  contestPlatforms: any = [];
-  selectedPlatforms: any = [];
-  contests: any = [];
-  time = new Array()
+  @ViewChild('userIcon', { read: ElementRef }) userIcon: ElementRef<HTMLElement>;
+  @ViewChild('usernameElement', { read: ElementRef }) usernameElement: ElementRef<HTMLElement>;
+  @ViewChild('nameElement', { read: ElementRef }) nameElement: ElementRef<HTMLElement>;
+
+  contestsData: Contest[] = [];
+  contestPlatforms: string[] = [];
+  selectedPlatforms: string[] = [];
+  contests: Contest[] = [];
+  currentPage = 1;
+  pageSize = 10;
   registeredPlatform = 0;
   value = 0;
   name: string;
@@ -39,7 +45,8 @@ export class DashboardPage implements OnInit, OnDestroy {
     private _loaderService: LoaderService,
     private _userService: UserService,
     private _localStorageService: LocalStorageService,
-    private _themeService: ThemeService
+    private _themeService: ThemeService,
+    private _renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -51,18 +58,18 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.countDownInterval.unsubscribe();
+    this.countDownInterval?.unsubscribe();
   }
 
   showUser() {
-    if (document.body.clientWidth < 480) {
-      document.getElementById('user').classList.add('hide')
-      document.getElementById('username').style.display = 'block'
-      document.getElementById('name').style.display = 'block'
+    if (window.innerWidth < 480) {
+      this._renderer.addClass(this.userIcon.nativeElement, 'hide');
+      this._renderer.setStyle(this.usernameElement.nativeElement, 'display', 'block');
+      this._renderer.setStyle(this.nameElement.nativeElement, 'display', 'block');
       setTimeout(() => {
-        document.getElementById('user').classList.remove('hide')
-        document.getElementById('username').style.display = ''
-        document.getElementById('name').style.display = ''
+        this._renderer.removeClass(this.userIcon.nativeElement, 'hide');
+        this._renderer.removeStyle(this.usernameElement.nativeElement, 'display');
+        this._renderer.removeStyle(this.nameElement.nativeElement, 'display');
       }, 2500)
     }
   }
@@ -79,16 +86,31 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   filterContestsByPlatform() {
     this.contests = (this.selectedPlatforms.length) ? this.contestsData.filter(contest => this.selectedPlatforms.includes(contest.platform)) : this.contestsData;
+    this.contests.forEach(c => { if (c.platform) c.platform = c.platform.replace(/^\w/, s => s.toUpperCase()); });
+    this.currentPage = 1;
   }
+
+  get paginatedContests(): Contest[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.contests.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.contests.length / this.pageSize) || 1;
+  }
+
+  nextPage() { if (this.currentPage < this.totalPages) this.currentPage++; }
+  prevPage() { if (this.currentPage > 1) this.currentPage--; }
 
   getPlatforms() {
     this._userService.getPlatforms().subscribe(
       data => {
-        for (let prop in data['platformData'].platform) {
-          if (data['platformData'].platform[prop])
+        const platformData = data.platformData.platform
+        for (const prop of Object.keys(platformData)) {
+          if (platformData[prop as keyof typeof platformData])
             this.registeredPlatform++
         }
-        this.value = 20 * this.registeredPlatform
+        this.value = 25 * this.registeredPlatform
       }
     )
   }
@@ -108,16 +130,14 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   startCountDown() {
-    this.countDownInterval = interval(60000).subscribe(() => {
+    this.countDownInterval = interval(1000).subscribe(() => {
       this.contests.forEach(contest => {
-        const startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
-        contest.startsIn = startsIn === 'Started' ? 'Started' : startsIn;
+        contest.startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
       });
     });
 
     this.contests.forEach(contest => {
-      const startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
-      contest.startsIn = startsIn === 'Started' ? 'Started' : startsIn;
+      contest.startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
     });
   }
 }

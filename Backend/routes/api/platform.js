@@ -9,12 +9,30 @@ const Platform = require('../../models/Platform')
 // @route   GET api/platform/details
 // @desc    Get current platform data
 // @access  Private
-router.get('/details', auth, async (req, res) => {
+router.get("/details", auth, async (req, res) => {
   try {
     let platformData = await Platform.findOne({ user: req.user.id })
 
     if (platformData) {
-      return res.json({ platformData })
+      const result = {
+        platformData: {
+          ...platformData.toObject ? platformData.toObject() : platformData,
+          last_fetched: platformData.last_fetched || null
+        }
+      };
+      // Add per-configured-platform last fetched from Profile model
+      const platforms = ["codechef","codeforces","leetcode","atcoder"];
+      const profileData = [];
+      for (const p of platforms) {
+        const uname = platformData.platform ? platformData.platform[p] : null;
+        if (uname) {
+          const Profile = require("../../models/Profile");
+          const prof = await Profile.findOne({ platform: p, username: uname.toLowerCase().trim() }).lean();
+          profileData.push({ platform: p, username: uname, last_fetched: prof ? prof.last_fetched : null, status: prof ? "live" : "no_data" });
+        }
+      }
+      result.profileData = profileData;
+      return res.json(result);
     }
 
     platformData = new Platform({
@@ -22,7 +40,6 @@ router.get('/details', auth, async (req, res) => {
       platform: {
         codechef: null,
         codeforces: null,
-        spoj: null,
         leetcode: null,
         atcoder: null
       }
@@ -52,7 +69,6 @@ router.put('/updateplatform', [auth, [
     let platformData = await Platform.findOne({ user: req.user.id })
     if (platformName === "codechef") platformData.platform.codechef = username
     if (platformName === "codeforces") platformData.platform.codeforces = username
-    if (platformName === "spoj") platformData.platform.spoj = username
     if (platformName === "leetcode") platformData.platform.leetcode = username
     if (platformName === "atcoder") platformData.platform.atcoder = username
 

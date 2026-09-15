@@ -2,7 +2,7 @@
   <h1>Resources</h1>
   <div class="container">
     <ion-card *ngFor="let platform of platforms">
-      <a [href]="platform.url" target=”_blank”>
+      <a [href]="platform.url" target="_blank">
         <ion-card-content class="no-padding">
           <ion-label>{{platform.name}}</ion-label>
           <img [src]="'../../../../assets/Platforms/'+platform.img">

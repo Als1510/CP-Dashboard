@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -11,11 +11,12 @@ import { LoaderService } from 'src/app/services/loader.service';
   templateUrl: './forgetpassword.page.html',
   styleUrls: ['./forgetpassword.page.scss'],
 })
-export class ForgetpasswordPage implements OnInit {
+export class ForgetpasswordPage implements OnInit, OnDestroy {
 
   resetPasswordForm: FormGroup
   hide = false
   showTimer = false
+  private timerHandle: any
 
   constructor(
     private _router: Router,
@@ -25,6 +26,14 @@ export class ForgetpasswordPage implements OnInit {
     private _authService: AuthService,
     private _alertService: AlertService
   ) { }
+
+  ngOnDestroy() {
+    this.disableTimer();
+    if (this.timerHandle) {
+      clearTimeout(this.timerHandle);
+      this.timerHandle = null;
+    }
+  }
 
   ngOnInit() {
     this.showCard('form1')
@@ -45,6 +54,10 @@ export class ForgetpasswordPage implements OnInit {
     this.showCard('form1')
     this.hideCard('form2')
     this.disableTimer()
+    if (this.timerHandle) {
+      clearTimeout(this.timerHandle);
+      this.timerHandle = null;
+    }
   }
 
   eye() {
@@ -73,32 +86,33 @@ export class ForgetpasswordPage implements OnInit {
   }
 
   timer(remain) {
-    if(this.showTimer) {
+    if (this.showTimer) {
       let m = Math.floor(remain / 60)
       let s = remain % 60
-      
-      let result = '0'+m+':';
-      
-      if(s<10) {
-        result += '0'+s
-      } else{
+
+      let result = '0' + m + ':'
+
+      if (s < 10) {
+        result += '0' + s
+      } else {
         result += s
       }
-      
+
       let timerId = document.getElementById('time_left')
-      
-      if(m ==0 && s<=30) {
-        timerId.classList.add('danger')
+      if (timerId) {
+        if (m === 0 && s <= 30) {
+          timerId.classList.add('danger')
+        }
+        timerId.innerHTML = result
       }
-      
-      timerId.innerHTML = result
+
       remain -= 1
-      
-      if(remain >= 0) {
-        setTimeout(() => {
+
+      if (remain >= 0) {
+        this.timerHandle = setTimeout(() => {
           this.timer(remain)
-        }, 1000);
-        return;
+        }, 1000)
+        return
       } else {
         this._alertService.presentToast('OTP time out', 'danger')
         this._router.navigate(['login'])
@@ -107,6 +121,13 @@ export class ForgetpasswordPage implements OnInit {
   }
 
   submitEmail() {
+    // Cancel any previous OTP timer before starting a new one
+    this.disableTimer();
+    if (this.timerHandle) {
+      clearTimeout(this.timerHandle);
+      this.timerHandle = null;
+    }
+
     let email = this.resetPasswordForm.get('email').value.toLowerCase()
     this._authService.requestOtp(email).subscribe(
       data => {

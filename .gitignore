@@ -13,3 +13,5 @@ Frontend/plugins
 Frontend/www
 Backend/node_modules
 Backend/.env
+*.log
+nodeprocs.json

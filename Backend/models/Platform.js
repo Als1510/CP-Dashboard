@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const PlatoformSchema = new mongoose.Schema({
+const PlatformSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
@@ -12,9 +12,6 @@ const PlatoformSchema = new mongoose.Schema({
     codeforces: {
       type: String,
     },
-    spoj: {
-      type: String,
-    },
     leetcode: {
       type: String,
     },
@@ -24,4 +21,4 @@ const PlatoformSchema = new mongoose.Schema({
   }
 })
 
-module.exports = Platform = mongoose.model('platform', PlatoformSchema)
+module.exports = Platform = mongoose.model('platform', PlatformSchema)

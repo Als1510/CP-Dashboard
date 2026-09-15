@@ -2,55 +2,31 @@
   <div class="header">
     <img src="../../../../../assets/Platforms/atcoder.png" alt="">
     <h1>Atcoder</h1>
+    <ion-button class="refresh-btn" *ngIf="userData" [disabled]="isRefreshing" (click)="refreshUserData()">
+      <ion-icon name="refresh-outline" *ngIf="!isRefreshing"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="isRefreshing"></ion-spinner>
+    </ion-button>
   </div>
   <div class="container" *ngIf="userData; else noData">
     <ion-card class="wrapper" *ngIf="loaded">
       <div class="box">
         <h2>User Profile</h2>
         <div class="user_details">
-        <p class="username">{{username}}</p>
-        <div class="level" *ngIf="userData.level">
+        <p class="username">{{userData.username || username}}</p>
+        <div class="level" *ngIf="userData.level && userData.level !== 'NA'">
           <ion-icon name="people-outline"></ion-icon>
           Level: {{userData.level}}
         </div>
-        <div class="rank" *ngIf="userData.rank">
+        <div class="rank" *ngIf="userData.rank && userData.rank !== 'NA'">
           <ion-icon name="trophy-outline"></ion-icon>
           Rank: {{userData.rank}}
         </div>
-        <p class="data" *ngIf="userData.Rating">Rating: <span>{{userData.Rating}}</span></p>
-        <p class="data">Highest Rating: <span>{{userData.highest}}</span></p>
-        <div class="country">
-          <ion-icon name="globe-outline"></ion-icon>
-          Country/Region: <span>{{userData.CountryRegion}}</span>
-        </div>
-        <p class="data">Birth Year: <span>{{userData.BirthYear}}</span></p>
-        <div class="last_compete" *ngIf="userData.LastCompeted">
-          <ion-icon name="save-outline"></ion-icon>
-          Last Compete: <span>{{userData1.LastCompeted}}</span>
-        </div>
-        <div class="rated_matches" *ngIf="userData.ratedMatches">
-          <ion-icon name="people-outline"></ion-icon>
-          Rated Matches: <span>{{userData.ratedMatches}}</span>
-        </div>
-        <div class="affiliation" *ngIf="userData.Affiliation">
-          <ion-icon name="business-outline"></ion-icon>
-          Affiliation: <span>{{userData.Affiliation}}</span>
-        </div>
-        <div class="twitter" *ngIf="userData.TwitterID">
-          <ion-icon name="logo-twitter"></ion-icon>
-          Twitter ID: <span>{{userData.TwitterID}}</span>
-        </div>
-        <div class="topcoder" *ngIf="userData.TopCoderID">
-          <img src="../../../../../assets/Platforms/topcoder.png" alt="">
-          Topcoder ID: <span>{{userData.TopCoderID}}</span>
-        </div>
-        <div class="codeforces" *ngIf="userData.CodeforcesID">
-          <img src="../../../../../assets/Platforms/codeforces.png" alt="">
-          Codeforces ID: <span>@{{userData.CodeforcesID}}</span>
-        </div>
+        <p class="data" *ngIf="userData.rating && userData.rating !== 'NA'">Rating: <span>{{userData.rating}}</span></p>
+        <p class="data" *ngIf="userData.highest_rating && userData.highest_rating !== 'NA'">Highest Rating: <span>{{userData.highest_rating}}</span></p>
       </div>
       </div>
       <img src="../../../../../assets/Utils/leetcode_avatar.jpg" alt="">
+      <!-- Unavailable backend fields gated: TopCoderID, TwitterID, CodeforcesID, LastCompeted, Rated Matches, BirthYear, CountryRegion, Affiliation -->
     </ion-card>
   </div>
   <ng-template #noData>

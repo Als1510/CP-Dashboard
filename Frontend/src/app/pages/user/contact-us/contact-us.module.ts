@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ContactUsPageRoutingModule } from './contact-us-routing.module';
 
-import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component';
 import { SharedModule } from '../../utils/shared.module';
 import { ContactUsPage } from './contact-us.page';
 
@@ -19,6 +18,6 @@ import { ContactUsPage } from './contact-us.page';
     ContactUsPageRoutingModule,
     SharedModule
   ],
-  declarations: [ContactUsPage, MenubuttonComponent]
+  declarations: [ContactUsPage]
 })
 export class ContactUsPageModule { }

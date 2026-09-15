@@ -39,15 +39,18 @@ export class HttpinterceptorService {
       catchError((error) => {
         this._loaderService.isLoading.next(false);
         if (error instanceof HttpErrorResponse) {
-          if (Array.isArray(error.error.errors)) {
-            this._alertService.presentToast(error.error.errors[0].msg, 'danger')
+          const errorBody = error.error;
+          const serverMsg = errorBody && (errorBody.details || errorBody.msg || errorBody.message);
+
+          if (Array.isArray(errorBody && errorBody.errors)) {
+            this._alertService.presentToast(errorBody.errors[0].msg, 'danger')
+          } else if (serverMsg) {
+            this._alertService.presentToast(serverMsg, 'danger')
           } else {
             switch (error.status) {
               case 401:
+                this._alertService.presentToast('Session expired. Please login again.', 'danger')
                 this._router.navigate(['login']);
-                break;
-              case 404:
-                this._router.navigate(['400']);
                 break;
               case 500:
                 this._router.navigate(['500']);

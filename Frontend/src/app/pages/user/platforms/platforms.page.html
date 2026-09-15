@@ -2,46 +2,65 @@
   <h1>Platforms</h1>
   <div class="wrapper" id="wrapper">
     <ion-card *ngIf="platforms.codeforces">
+      <div class="badge-top" *ngIf="platformStatus['codeforces']">● {{platformStatus['codeforces']}}</div>
       <img src="../../../../assets/Platforms/codeforces.png" alt="">
       <div class="platform_details">
         <h2>Codeforces</h2>
-        <p class="user">{{platforms.codeforces}}</p>
+        <p class="user">@{{platforms.codeforces}}</p>
+        <p class="last-fetched" *ngIf="lastFetched['codeforces']">Last fetched: {{lastFetched['codeforces']}}</p>
+      </div>
+      <ion-button class="edit-btn-top" (click)="editPlatform('codeforces')" title="Edit username">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      <div class="card-actions">
         <ion-button (click)="navigateTo('codeforces')">Show Profile<ion-icon
             name="arrow-forward-outline"></ion-icon></ion-button>
       </div>
     </ion-card>
     <ion-card *ngIf="platforms.leetcode">
+      <div class="badge-top" *ngIf="platformStatus['leetcode']">● {{platformStatus['leetcode']}}</div>
       <img src="../../../../assets/Platforms/leetcode.png" alt="">
       <div class="platform_details">
         <h2>Leetcode</h2>
-        <p class="user">{{platforms.leetcode}}</p>
+        <p class="user">@{{platforms.leetcode}}</p>
+        <p class="last-fetched" *ngIf="lastFetched['leetcode']">Last fetched: {{lastFetched['leetcode']}}</p>
+      </div>
+      <ion-button class="edit-btn-top" (click)="editPlatform('leetcode')" title="Edit username">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      <div class="card-actions">
         <ion-button (click)="navigateTo('leetcode')">Show Profile<ion-icon
             name="arrow-forward-outline"></ion-icon></ion-button>
       </div>
     </ion-card>
-    <ion-card *ngIf="platforms.spoj">
-      <img src="../../../../assets/Platforms/spoj.png" alt="">
-      <div class="platform_details">
-        <h2>Spoj</h2>
-        <p class="user">{{platforms.spoj}}</p>
-        <ion-button (click)="navigateTo('spoj')">Show Profile<ion-icon
-            name="arrow-forward-outline"></ion-icon></ion-button>
-      </div>
-    </ion-card>
     <ion-card *ngIf="platforms.atcoder">
+      <div class="badge-top" *ngIf="platformStatus['atcoder']">● {{platformStatus['atcoder']}}</div>
       <img src="../../../../assets/Platforms/atcoder.png" alt="">
       <div class="platform_details">
         <h2>Atcoder</h2>
-        <p class="user">{{platforms.atcoder}}</p>
+        <p class="user">@{{platforms.atcoder}}</p>
+        <p class="last-fetched" *ngIf="lastFetched['atcoder']">Last fetched: {{lastFetched['atcoder']}}</p>
+      </div>
+      <ion-button class="edit-btn-top" (click)="editPlatform('atcoder')" title="Edit username">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      <div class="card-actions">
         <ion-button (click)="navigateTo('atcoder')">Show Profile<ion-icon
             name="arrow-forward-outline"></ion-icon></ion-button>
       </div>
     </ion-card>
     <ion-card *ngIf="platforms.codechef">
+      <div class="badge-top" *ngIf="platformStatus['codechef']">● {{platformStatus['codechef']}}</div>
       <img src="../../../../assets/Platforms/codechef.png" alt="">
       <div class="platform_details">
         <h2>Codechef</h2>
-        <p class="user">{{platforms.codechef}}</p>
+        <p class="user">@{{platforms.codechef}}</p>
+        <p class="last-fetched" *ngIf="lastFetched['codechef']">Last fetched: {{lastFetched['codechef']}}</p>
+      </div>
+      <ion-button class="edit-btn-top" (click)="editPlatform('codechef')" title="Edit username">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      <div class="card-actions">
         <ion-button (click)="navigateTo('codechef')">Show Profile<ion-icon
             name="arrow-forward-outline"></ion-icon></ion-button>
       </div>
@@ -51,7 +70,7 @@
     <h1>Add platforms here</h1>
     <ion-icon name="trending-down-outline"></ion-icon>
   </div>
-  <ion-card class="modal" id="modal">
+  <ion-card class="modal" #modal>
     <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="stacked">Platform Name</ion-label>
@@ -74,7 +93,7 @@
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button *ngFor="let platform of platforms | keyvalue" (click)="showCard(platform)" class="fab-item">
+      <ion-fab-button *ngFor="let platform of platformEntries" (click)="showCard(platform)" class="fab-item">
         <img [src]="'../../../../assets/Platforms/'+platform.key+'.png'">
       </ion-fab-button>
     </ion-fab-list>

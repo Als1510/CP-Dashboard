@@ -2,6 +2,10 @@
   <div class="header">
     <img src="../../../../../assets/Platforms/codechef.png" alt="">
     <h1>Codechef</h1>
+    <ion-button class="refresh-btn" *ngIf="userData" [disabled]="isRefreshing" (click)="refreshUserData()">
+      <ion-icon name="refresh-outline" *ngIf="!isRefreshing"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="isRefreshing"></ion-spinner>
+    </ion-button>
   </div>
   <div class="container" *ngIf="userData; else noData">
     <div class="box">
@@ -76,21 +80,16 @@
       <h1>Problems Solved</h1>
       <div class="solved" *ngIf="userData.fully_solved.count > 0">
         <h4>Fully Solved ({{userData.fully_solved.count}})</h4>
-        <div class="problems_section" *ngFor="let problems of userData.fully_solved | keyvalue">
-          <p *ngIf="problems.value.length>0">{{problems.key}}:</p>
-          <div class="problem_tags" *ngIf="problems.value.length>0">
-            <a *ngFor="let tag of problems.value" [href]="tag.link">{{tag.name}}, </a>
+        <div class="problems_section" *ngFor="let problems of getProblemsValue(k, 'fully_solved')">
+          <p *ngIf="problems.length>0">{{k}}:</p>
+          <div class="problem_tags" *ngIf="problems.length>0">
+            <a *ngFor="let tag of problems" [href]="tag.link">{{tag.name}}, </a>
           </div>
         </div>
       </div>
       <div class="solved" *ngIf="userData.partially_solved.count > 0">
         <h4>Partially Solved ({{userData.partially_solved.count}})</h4>
-        <div class="problems_section" *ngFor="let problems of userData.partially_solved | keyvalue">
-          <p *ngIf="problems.value.length>0">{{problems.key}}:</p>
-          <div class="problem_tags" *ngIf="problems.value.length>0">
-            <a *ngFor="let tag of problems.value" [href]="tag.link">{{tag.name}}, </a>
-          </div>
-        </div>
+        <div class="problems_section" *ngFor="let problems of getProblemsValue(k, 'partially_solved')">
       </div>
     </ion-card>
   </div>

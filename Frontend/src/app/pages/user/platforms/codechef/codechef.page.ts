@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { LoaderService } from 'src/app/services/loader.service';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-codechef',
   templateUrl: './codechef.page.html',
   styleUrls: ['./codechef.page.scss'],
 })
-export class CodechefPage implements OnInit {
+export class CodechefPage implements OnInit, OnDestroy {
   lineChart: Chart;
   userData: any = null
   username
@@ -27,12 +28,16 @@ export class CodechefPage implements OnInit {
     { rating: [2500, 5000], star: 7, color: '#D0011B', div: 1 },
   ]
   loaded = false
+  isRefreshing = false
+
+  @ViewChild('lineCanvas') lineCanvas: ElementRef<HTMLCanvasElement>;
 
   constructor(
     private _userService: UserService,
     private _localStorageService: LocalStorageService,
-    private _loderService: LoaderService,
-    private _utilService: UtilService
+    private _loaderService: LoaderService,
+    private _utilService: UtilService,
+    private _alertService: AlertService
   ) {
     Chart.register(...registerables)
   }
@@ -42,6 +47,11 @@ export class CodechefPage implements OnInit {
     this.getUserData()
   }
 
+  ngOnDestroy(): void {
+    this.lineChart?.destroy();
+    this._loaderService.isLoading.next(false);
+  }
+
   getData() {
     let platform = this._localStorageService.getPlatform();
     this.platform = Object.keys(platform)[0]
@@ -49,21 +59,62 @@ export class CodechefPage implements OnInit {
   }
 
   getUserData() {
+    this._loaderService.isLoading.next(true)
     this._userService.getUserDetails(this.platform, this.username).subscribe(
       data => {
-        if (data['status'] == "OK") {
-          this.userData = data
-          this.CalStars()
-          this.userData.user_details['student_professional'] = this.userData.user_details['student/professional']
-          this.contestArray = this.userData.contest_ratings.map(res => res.name)
-          this.ratingArray = this.userData.contest_ratings.map(res => res.rating)
-          setTimeout(() => {
-            this.lineChartMethod()
-            this._loderService.isLoading.next(false)
-          }, 1)
-        }
+        this.applyUserData(data)
+        this._loaderService.isLoading.next(false)
+        this.loaded = true
+      },
+      () => {
+        this._loaderService.isLoading.next(false)
+        this.showError({ details: 'Failed to load profile.' })
       }
     )
+  }
+
+  refreshUserData(refresher?: HTMLIonRefresherElement) {
+    // Prevent duplicate refresh requests while one is already running
+    if (this.isRefreshing) {
+      return
+    }
+
+    this.isRefreshing = true
+    this._loaderService.isLoading.next(true)
+    this._userService.refreshUserDetails(this.platform, this.username).subscribe({
+      next: (data) => {
+        this.applyUserData(data)
+      },
+      error: (err) => {
+        this.showError(err || { details: 'Refresh failed. Existing data preserved.' })
+      },
+      complete: () => {
+        this.isRefreshing = false
+        this._loaderService.isLoading.next(false)
+        if (refresher) {
+          refresher.complete()
+        }
+      }
+    })
+  }
+
+  applyUserData(data: any) {
+    if (data['status'] == "OK") {
+      this.userData = data
+      this.CalStars()
+      this.contestArray = this.userData.contest_ratings.map(res => res.name)
+      this.ratingArray = this.userData.contest_ratings.map(res => res.rating)
+      setTimeout(() => {
+        this.lineChartMethod()
+      }, 1)
+    } else {
+      this.showError(data)
+    }
+  }
+
+  showError(data: any) {
+    const message = (data && data['details']) || 'Could not fetch profile. Please try again later.'
+    this._alertService.presentToast(message, 'danger')
   }
 
   countStars(data) {
@@ -82,8 +133,8 @@ export class CodechefPage implements OnInit {
   }
 
   lineChartMethod() {
-    let lineCanvas = document.querySelector('canvas')
-    this.lineChart = new Chart(lineCanvas, {
+    this.lineChart?.destroy();
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: "line",
       data: {
         labels: this.contestArray,
@@ -143,5 +194,10 @@ export class CodechefPage implements OnInit {
       }
     })
     this.loaded = true
+  }
+
+  getProblemsValue(key: string, section: string): any {
+    const sec = (this.userData as any)[section];
+    return sec && sec[key] ? sec[key] : [];
   }
 }

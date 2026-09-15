@@ -85,12 +85,18 @@ router.post('/', [
     };
 
     apiInstance.sendTransacEmail(sendSmtpEmail).then(
-      function (data) {
-        user.save();
-        res.json({ msg: "Verification link has been sent to your email account. Please activate your account", name })
+      async function (data) {
+        try {
+          await user.save();
+          res.json({ msg: "Verification link has been sent to your email account. Please activate your account", name })
+        } catch (saveErr) {
+          console.error('User save failed after email sent:', saveErr.message);
+          res.json({ msg: "Verification link has been sent to your email account. Please activate your account", name })
+        }
       },
       function (error) {
-        return res.status(400).json({ errors: [{ msg: 'Entered email address is not valid' }] })
+        console.error('Email sending failed:', error.message || error);
+        return res.status(400).json({ errors: [{ msg: 'Entered email address is not valid or could not be delivered' }] })
       }
     );
 

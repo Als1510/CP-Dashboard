@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ResourcesPageRoutingModule } from './resources-routing.module';
 
-import { MenubuttonComponent } from '../../utils/menubutton/menubutton.component';
 import { SharedModule } from '../../utils/shared.module';
 import { ResourcesPage } from './resources.page';
 
@@ -18,6 +17,6 @@ import { ResourcesPage } from './resources.page';
     ResourcesPageRoutingModule,
     SharedModule
   ],
-  declarations: [ResourcesPage, MenubuttonComponent]
+  declarations: [ResourcesPage]
 })
 export class ResourcesPageModule { }

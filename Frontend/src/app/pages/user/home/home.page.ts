@@ -4,6 +4,7 @@ import { ContestService } from 'src/app/services/contest.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { UtilService } from 'src/app/services/util.service';
+import { Contest } from 'src/app/models/contest.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -12,8 +13,8 @@ import { UtilService } from 'src/app/services/util.service';
 export class HomePage implements OnInit, OnDestroy {
 
   theme: string;
-  contests: any = [];
-  element
+  contests: Contest[] = [];
+  element: any;
   countDownInterval: Subscription;
 
   constructor(
@@ -44,7 +45,10 @@ export class HomePage implements OnInit, OnDestroy {
       element.addEventListener('click', () => {
         const isRotated = element.classList.contains('rotate');
         element.classList.toggle('rotate', !isRotated);
-        (element.nextElementSibling as HTMLElement).style.display = isRotated ? 'none' : 'block';
+        const sibling = element.nextElementSibling as HTMLElement | null;
+        if (sibling) {
+          sibling.style.display = isRotated ? 'none' : 'block';
+        }
       });
     });
   }
@@ -56,8 +60,9 @@ export class HomePage implements OnInit, OnDestroy {
   async getUpcomingOngoingContest(): Promise<void> {
     return new Promise((resolve) => {
       this._contestService.getUpcomingOngoingContest().subscribe(
-        (data: any) => {
+        (data: Contest[]) => {
           this.contests = data;
+          this.contests.forEach(c => { if (c.platform) c.platform = c.platform.replace(/^\w/, s => s.toUpperCase()); });
           this._loaderService.isLoading.next(false);
           resolve();
         }
@@ -66,18 +71,15 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   startCountDown() {
-    this.countDownInterval = interval(60000).subscribe(() => {
+    this.countDownInterval = interval(1000).subscribe(() => {
       this.contests.forEach(contest => {
-        const startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
-        contest.startsIn = startsIn === 'Started' ? 'Started' : startsIn;
+        contest.startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
       });
     });
 
     this.contests.forEach(contest => {
-      const startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
-      contest.startsIn = startsIn === 'Started' ? 'Started' : startsIn;
+      contest.startsIn = this._utilService.convertDateTimeToMilliseconds(new Date(contest.startTime));
     });
-    console.log(this.contests)
   }
 
   getBackground() {
