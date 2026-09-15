@@ -74,7 +74,7 @@
     <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="stacked">Platform Name</ion-label>
-        <ion-input type="text" name="platformName" formControlName="platformName" readonly value={{platformName}}>
+        <ion-input type="text" name="platformName" formControlName="platformName" readonly [value]="platformForm.get('platformName')?.value">
         </ion-input>
       </ion-item>
       <ion-item>
